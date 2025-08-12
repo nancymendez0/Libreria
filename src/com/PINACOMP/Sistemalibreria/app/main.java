@@ -2,8 +2,10 @@ package com.PINACOMP.Sistemalibreria.app;
 
 import com.PINACOMP.Sistemalibreria.model.entidades.Comics;
 import com.PINACOMP.Sistemalibreria.model.entidades.Libro;
+import com.PINACOMP.Sistemalibreria.model.entidades.Novelas;
 import com.PINACOMP.Sistemalibreria.model.enums.TipoGenero;
 import com.PINACOMP.Sistemalibreria.model.enums.Tipoedicion;
+import com.PINACOMP.Sistemalibreria.model.enums.Tiposubgenero;
 import com.PINACOMP.Sistemalibreria.model.enums.Tipouniverso;
 
 public class main {
@@ -21,5 +23,8 @@ public class main {
         Comics c1 = new Comics(1,"Año uno",235.56,"12345kkf23", TipoGenero.FANTASIA, "fraile","Batman", Tipouniverso.DC, 2, Tipoedicion.EDICIONDELUXE);
         System.out.println(c1.toString());
 
+        //Creando instacia de novelas
+        Novelas n1 = new Novelas(2,"Romeo y Julieta",500.56,"126775gth3", TipoGenero.ROMANTICO, "Santillana", Tiposubgenero.HISTORICO, 560,Tipoedicion.EDICIONBOLSILLO);
+        System.out.println(n1.toString());
     }
 }
