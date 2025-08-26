@@ -4,6 +4,9 @@ public enum TipoNacionalidad {
     MEXICANA,
     ARGENTINA,
     ESPAÑOLA,
+    ESTADOUNIDENSE,
+    BRITANICA,
+    FRANCESA,
     DESCONOCIDA;
     @Override
     public String toString() {
