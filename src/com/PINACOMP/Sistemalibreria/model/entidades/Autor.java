@@ -31,6 +31,7 @@ public class Autor extends Persona {
     }
 
 
+
     //Getters , devuelven
     //omite Set para que sean inmutables
     //Get que devuelve el nombre completo del autor
