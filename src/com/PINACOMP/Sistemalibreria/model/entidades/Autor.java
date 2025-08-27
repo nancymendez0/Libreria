@@ -30,7 +30,10 @@ public class Autor extends Persona {
         this.cantidadLibros = cantidadLibros;
     }
 
-
+    public Autor(String nombre, String apellidoPaterno, String apellidoMaterno) {
+        super(nombre, apellidoPaterno);
+        this.apellidoMaterno = apellidoMaterno;
+    }
 
     //Getters , devuelven
     //omite Set para que sean inmutables

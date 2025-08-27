@@ -1,11 +1,12 @@
 package com.PINACOMP.Sistemalibreria.model.entidades;
 
+import com.PINACOMP.Sistemalibreria.app.Buscador;
 import com.PINACOMP.Sistemalibreria.model.enums.TipoGenero;
 
-public class Libro {
+public class Libro implements Buscador {
     protected int id;
     protected String titulo;
-    //Autor autor;
+    Autor autor;
     protected double precio;
     protected String isbn;
     protected TipoGenero genero;
@@ -14,9 +15,10 @@ public class Libro {
     public Libro() {
     }
 
-    public Libro(int id, String titulo, double precio, String isbn, TipoGenero genero, String editorial) {
+    public Libro(int id, String titulo, Autor autor, double precio, String isbn, TipoGenero genero, String editorial) {
         this.id = id;
         this.titulo = titulo;
+        this.autor = autor;
         this.precio = precio;
         this.isbn = isbn;
         this.genero = genero;
@@ -45,6 +47,10 @@ public class Libro {
 
     public String getEditorial() {
         return editorial;
+    }
+
+    public Autor getAutor() {
+        return autor;
     }
 
     @Override

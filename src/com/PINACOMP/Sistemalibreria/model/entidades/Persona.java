@@ -18,6 +18,12 @@ public class Persona {
         this.edad = edad;
         this.sexo = sexo;
     }
+
+    public Persona(String nombre, String apellidoPaterno) {
+        this.nombre = nombre;
+        this.apellidoPaterno = apellidoPaterno;
+    }
+
     public int getId() {
         return id;
     }
