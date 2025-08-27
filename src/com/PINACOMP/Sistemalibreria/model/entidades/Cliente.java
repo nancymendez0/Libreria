@@ -5,7 +5,7 @@ import com.PINACOMP.Sistemalibreria.model.enums.TipoSexo;
 
 //Clase que representa un cliente en el sistema
 //Hereda atributos generales de la clase persona
-public class Cliente extends Persona{
+public abstract class Cliente extends Persona{
     //atributos privados clase CLIENTE
     private int telefono;
     private String direccion;

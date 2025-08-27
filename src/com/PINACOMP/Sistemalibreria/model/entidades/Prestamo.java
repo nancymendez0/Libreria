@@ -4,7 +4,7 @@ import java.time.LocalDate;
 
 public class Prestamo extends OperacionBiblioteca {
     private int idCliente;
-    private String libro;
+    private Libro libro;
     //constructor que inicializa los atributos del préstamo incluyendo los heredados
     public Prestamo(int idOperacion, LocalDate fecha, int idCliente, String libro) {
         super(idOperacion, fecha);

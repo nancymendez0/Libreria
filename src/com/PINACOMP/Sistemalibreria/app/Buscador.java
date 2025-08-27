@@ -1,5 +1,6 @@
 package com.PINACOMP.Sistemalibreria.app;
 //Importación de clases necesarias para el tipo de retorno y parámetros
+import com.PINACOMP.Sistemalibreria.model.entidades.BuscadorObras;
 import com.PINACOMP.Sistemalibreria.model.entidades.Libro;
 import com.PINACOMP.Sistemalibreria.model.enums.TipoGenero;
 import java.util.List;
@@ -7,9 +8,18 @@ import java.util.List;
 //Interfaz que define lor métodos de búsqueda para libros , acuerda que deben cumplir las calses que la implementen
 
 public interface Buscador {
+
     //propósito del método , parámetros y retorno
     //Espera una cadena de texto para buscar por género
     //Regresa una lista de objetos (libros) que tienen el mismo genero
+    /**
+     * Busca obras que coincidan con el criterio dado.
+     * @param criterio Cadena de búsqueda (título, autor, etc.)
+     * @return Lista de libros que cumplen con el criterio.
+     */
+    List<Libro> buscar(String criterio);
+
+
     /**
      * Busca libros por género literario.
      * @param genero el género a buscar

@@ -1,28 +1,33 @@
 package com.PINACOMP.Sistemalibreria.model.enums;
-
+//ENUM que representa los géenros literarios , tomando una clasificacion academica
 public enum TipoGenero {
     NARRATIVO("Narrativo"),
     LIRICO("Lírico"),
     DRAMATICO("Dramático"),
     DIDACTICO("Didáctico"),
-    FANTASIA("Fantasía"),
-    DRAMA("Drama"),
-    ROMANCE("Romance"),
-    TERROR("Terror"),
-    CIENTIFICO("Científico"),
-    EDUCATIVO("Educativo"),
-    ENTRETENIMIENTO("Entretenimiento"),
-    AVENTURA("Aventura"), NOVELA("NOVELA"), LITERARIO("LITERARIO"), ROMANTICO("ROMANTICO");
+    EPICO("Épico");
 
-    private final String descripcion;
+    private final String etiqueta;
 
-    TipoGenero(String descripcion) {
-        this.descripcion = descripcion;
+    /**
+     * Constructor del enum que asigna la descripción legible.
+     * @param etiqueta Representación textual del género.
+     */
+    TipoGenero(String etiqueta) {
+        this.etiqueta = etiqueta;
     }
 
+    /**
+     * Devuelve la descripción legible del género.
+     * @return descripción como cadena.
+     */
     @Override
     public String toString() {
-        return descripcion;
+        return etiqueta;
+    }
+
+    public String getEtiqueta() {
+        return etiqueta;
     }
 
 
