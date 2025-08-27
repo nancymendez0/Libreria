@@ -9,16 +9,18 @@ public class MainNancy {
     public static void main(String[] args) {
 // Crear autor con datos completos
         Autor autor = new Autor(
-                1,
-                "Laura",
-                "Méndez",
-                "González",
-                "laura.mendez@gmail.com",
-                45,
-                TipoSexo.Femenino,
-                TipoNacionalidad.MEXICANA,
-                LocalDate.of(1980, 3, 15),
-                12
+                1,                                 // id
+                "Laura",                           // nombre
+                "Méndez",                          // apellidoPaterno
+                "Laura.mendez@gmail.com",          // correo
+                45,                                // edad
+                TipoSexo.Femenino,                 // sexo
+                "Mexicana",                        // nacionalidad (String)
+                LocalDate.of(1980, 3, 15),         // fechaNacimiento
+                TipoNacionalidad.MEXICANA,         // nacionalidad (enum)
+                12                                 // cantidadLibros
+
+
         );
 
         // Crear cliente con datos completos
@@ -32,7 +34,12 @@ public class MainNancy {
                 TipoPago.Tarjeta_credito,
                 "Av. Reforma 123",
                 555123
-        );
+        ) {
+            @Override
+            public TipoNacionalidad getNacionalidad() {
+                return null;
+            }
+        };
 
         // Crear préstamo
         Prestamo prestamo = new Prestamo(
