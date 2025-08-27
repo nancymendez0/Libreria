@@ -180,6 +180,3 @@ public abstract class mainEstatico implements Buscador {
         }
     }
 }
-
-
-

@@ -1,59 +1,60 @@
 package com.PINACOMP.Sistemalibreria.model.entidades;
 
 import com.PINACOMP.Sistemalibreria.model.enums.TipoGenero;
-import com.PINACOMP.Sistemalibreria.model.enums.Tiposubgenero;
 
 public class Libro {
     protected int id;
     protected String titulo;
+    //Autor autor;
     protected double precio;
     protected String isbn;
-    public TipoGenero genero;
-    protected Tiposubgenero subgenero;
+    protected TipoGenero genero;
     protected String editorial;
-    public Autor autor;
+    //generando nuestro constructor vacio
+    public Libro() {
+    }
 
-    public Libro(int id, String titulo, double precio, String isbn, TipoGenero genero, String editorial, Autor autor) {
+    public Libro(int id, String titulo, double precio, String isbn, TipoGenero genero, String editorial) {
         this.id = id;
         this.titulo = titulo;
         this.precio = precio;
         this.isbn = isbn;
         this.genero = genero;
-        this.subgenero = subgenero;
         this.editorial = editorial;
-        this.autor = autor;
     }
 
+    public int getId() {
+        return id;
+    }
 
+    public String getTitulo() {
+        return titulo;
+    }
 
-    public int getId() { return id; }
-    public String getTitulo() { return titulo; }
-    public double getPrecio() { return precio; }
-    public String getIsbn() { return isbn; }
-    public TipoGenero getGenero() { return genero; }
-    public Tiposubgenero getSubgenero() { return subgenero; }
-    public String getEditorial() { return editorial; }
+    public double getPrecio() {
+        return precio;
+    }
+
+    public String getIsbn() {
+        return isbn;
+    }
+
+    public TipoGenero getGenero() {
+        return genero;
+    }
+
+    public String getEditorial() {
+        return editorial;
+    }
 
     @Override
     public String toString() {
-        return "ID: " + id +
-                " | Título: " + titulo +
-                " | Precio: $" + precio +
-                " | ISBN: " + isbn +
-                " | Género: " + genero +
-                " | Subgénero: " + subgenero +
-                " | Editorial: " + editorial;
-    }
-
-    public Autor getAutor() {
-        return autor;
-    }
-
-    public void setAutor(Autor autor) {
-        this.autor = autor;
-    }
-
-    public void setSubgenero(Tiposubgenero subgenero) {
-        this.subgenero = subgenero;
+        StringBuilder sb= new StringBuilder();
+        sb.append("Titulo: ").append(titulo);
+        sb.append(" ISBN: ").append(isbn);
+        sb.append(" Precio: ").append(precio);
+        sb.append(" Genero: ").append(genero);
+        sb.append(" Editorial: ").append(editorial);
+        return sb.toString();
     }
 }
