@@ -9,12 +9,7 @@ public class Novelas extends Libro {
     int numPaginas;
     Tipoedicion edicion;
 
-    public Novelas(int id, String titulo, double precio, String isbn, TipoGenero genero, String editorial, Tiposubgenero subgenero, int numPaginas, Tipoedicion edicion) {
-        super(id, titulo, precio, isbn, genero, editorial);
-        this.subgenero = subgenero;
-        this.numPaginas = numPaginas;
-        this.edicion = edicion;
-    }
+
 
     public Tiposubgenero getSubgenero() {
         return subgenero;
