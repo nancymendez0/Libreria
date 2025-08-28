@@ -23,7 +23,7 @@ public class Autor extends Persona {
             LocalDate fechaNacimiento,
             int cantidadLibros
     ) {
-        super(nombre, apellidoPaterno, correo, edad, sexo, id);
+        super(id,nombre, apellidoPaterno, correo, edad, sexo);
         this.apellidoMaterno = apellidoMaterno;
         this.fechaNacimiento = fechaNacimiento;
         this.nacionalidad = nacionalidad;
@@ -39,7 +39,7 @@ public class Autor extends Persona {
     //omite Set para que sean inmutables
     //Get que devuelve el nombre completo del autor
     public String getNombreCompleto() {
-        return nombre+" "+apellidoMaterno;
+        return nombre+" "+apellidoPaterno+ " "+apellidoMaterno;
     }
 
     public TipoNacionalidad getNacionalidad() {
@@ -56,7 +56,7 @@ public class Autor extends Persona {
     //representación textual del autor , para poder imprimir en main
     @Override
     public String toString() {
-        return getNombreCompleto()+"("+nacionalidad+","+ sexo+")- Libros publicados: "+cantidadLibros;
+        return getNombreCompleto();
     }
 
 }

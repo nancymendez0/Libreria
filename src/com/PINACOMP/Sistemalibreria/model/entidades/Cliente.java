@@ -22,7 +22,7 @@ public class Cliente extends Persona{
             String direccion,
             int telefono
     ) {
-        super(nombre, apellidoPaterno, correo, edad, sexo, id);
+        super(id, nombre, apellidoPaterno, correo, edad, sexo);
         this.direccion = direccion;
         this.telefono = telefono;
         this.pago = pago;

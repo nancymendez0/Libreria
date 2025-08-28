@@ -1,11 +1,10 @@
 package com.PINACOMP.Sistemalibreria.model.entidades;
 
-import com.PINACOMP.Sistemalibreria.app.Buscador;
+import com.PINACOMP.Sistemalibreria.model.interfaces.Buscador;
 import com.PINACOMP.Sistemalibreria.model.enums.TipoGenero;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 /**
  * Clase que implementa la interfaz Buscador para realizar búsquedas literarias
