@@ -1,15 +1,22 @@
 package com.PINACOMP.Sistemalibreria.model.entidades;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
-public class Prestamo extends OperacionBiblioteca {
+public class Prestamo implements OperacionBiblioteca {
+    //nuevos atributos para implementar la interfaz
+    private String idOperacion;
+    private LocalDate fecha;
     private int idCliente;
-    private Libro libro;
+    private List<Libro> librosPrestados;
     //constructor que inicializa los atributos del préstamo incluyendo los heredados
-    public Prestamo(int idOperacion, LocalDate fecha, int idCliente, String libro) {
-        super(idOperacion, fecha);
+   //Consructor Actualizado
+    public Prestamo(String idOperacion, LocalDate fecha, int idCliente, String libro) {
+        this.idOperacion = idOperacion;
+        this.fecha = fecha;
         this.idCliente = idCliente;
-        this.libro = libro;
+        this.librosPrestados = librosPrestados;
     }
     public void mostrarResumen() {
         System.out.println(this.toString());
