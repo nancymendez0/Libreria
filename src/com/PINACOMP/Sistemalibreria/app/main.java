@@ -1,102 +1,82 @@
 package com.PINACOMP.Sistemalibreria.app;
-import com.PINACOMP.Sistemalibreria.data.Biblioteca;
 import com.PINACOMP.Sistemalibreria.model.entidades.*;
-import java.util.ArrayList;
+import com.PINACOMP.Sistemalibreria.model.servicios.EmpleadoService;
+import com.PINACOMP.Sistemalibreria.model.servicios.LibroService;
+import com.PINACOMP.Sistemalibreria.model.servicios.MenuService;
+
 import java.util.List;
 import java.util.Scanner;
 
 public class main {
     private static Scanner scanner = new Scanner(System.in);
-    private static List<Libro> biblioteca = new ArrayList<>();
+    static MenuService menu = new MenuService();
+    static Administrador ad1 = new Administrador("lalo9807","12345");
     public static void main(String[] args) {
-        biblioteca = Biblioteca.crearBiblioteca();
         int opcion;
-        do {
-            mostrarMenu();
-            opcion = leerOpcion();
-            ejecutarOpcion(opcion);
-        } while (opcion != 0);
-    }
+        System.out.println("BIENVENIDO A LIBRERIA ETERNAS");
+        System.out.println("¿Qué tipo de usuario eres:  \n 1-Cliente \n 2-Empleado   \n 0-Salir" );
+        opcion = leerOpcion();
+        while(opcion!=0){
+                if (opcion==1){
+                    int opcionCliente;
+                    do {
+                        menu.menuCliente();
+                        opcionCliente = leerOpcion();
+                        menu.accionesCliente(opcionCliente);
+                    }while(opcionCliente!=0);
+                }else if(opcion==2){
+                    System.out.println("¿Qué tipo de empleado eres \n 1-Vendedor \n 2-Administrador \n 0-Salir");
+                    int opcionEmpleado;
+                    opcionEmpleado = leerOpcion();
+                    if (opcionEmpleado==1){
+                        int opcionVendedor;
+                        do {
+                            menu.menuEmpleado();
+                            opcionVendedor = leerOpcion();
+                            menu.accionesEmpleado(opcionVendedor, scanner);
 
-    private static void mostrarMenu() {
-        System.out.println("\nMENÚ PRINCIPAL");
-        System.out.println("1. Mostrar todos los libros");
-        System.out.println("2. Buscar por género");
-        System.out.println("3. Buscar por autor");
-        System.out.println("4. Buscar por título");
-        System.out.println("5. Buscar por precio");
-        System.out.println("0. Salir");
-        System.out.print("Seleccione una opción: ");
-    }
+                        }while (opcionVendedor!=0);
+                    }else if(opcionEmpleado==2){
+                        String nombreUsuario;
+                        String contraseniaDigitada;
+                        System.out.println("Bienvenido Ingresa tu nombre de usuario ");
+                        nombreUsuario = leerDatos();
+                        System.out.println("Ingresa tu contraseña");
+                        contraseniaDigitada = leerDatos();
+                        boolean validador;
+                        validador= ad1.iniciarSesion(nombreUsuario, contraseniaDigitada);
+                        if (validador==true){
+                            int opcionAdmin;
+                            do {
+                                menu.menuAdmin(nombreUsuario);
+                                opcionAdmin=leerOpcion();
+                                menu.accionesAdmin(opcionAdmin);
 
+                            }while (opcionAdmin!=0);
+
+                        }else{
+                            System.out.println("usuario o contraseña incorrectos");
+                            opcion = leerOpcion();
+                        }
+                    }
+                }
+        System.out.println("¿Qué tipo de usuario eres:  \n 1-Cliente \n 2-Empleado   \n 0-Salir" );
+        opcion = leerOpcion();
+            } //fin de while
+        System.out.println("Gracias por usar el Sistema de librerias Eternas");
+        System.out.println("¡Hasta pronto!");
+        }
     private static int leerOpcion() {
         int opcion = scanner.nextInt();
         scanner.nextLine(); // Limpiar buffer
         return opcion;
     }
-
-    private static void ejecutarOpcion(int opcion) {
-        switch (opcion) {
-            case 1 -> mostrarResultados(biblioteca);
-            /*
-            case 2 -> buscarPorGenero();
-            case 3 -> buscarPorAutor();
-            case 4 -> buscarPorTitulo();
-            case 5 -> buscarPorPrecio();
-
-             */
-            case 0 -> System.out.println(" Saliendo del sistema...");
-            default -> System.out.println(" Opción no válida.");
-        }
+    private static String leerDatos() {
+        String valor = scanner.nextLine();
+        //scanner.nextLine(); // Limpiar buffer
+        return valor;
     }
-/*
-    private static void buscarPorGenero() {
-        System.out.print("Ingrese el género (NOVELA, COMIC, POESIA...): ");
-        String generoStr = scanner.nextLine().toUpperCase();
-        try {
-            TipoGenero genero = TipoGenero.valueOf(generoStr);
-            mostrarResultados(buscador.busquedaGeneroLibro(genero));
-        } catch (IllegalArgumentException e) {
-            System.out.println(" Género no válido.");
-        }
     }
 
-
-    private static void buscarPorAutor() {
-        System.out.print("Ingrese el nombre del autor: ");
-        String autor = scanner.nextLine();
-        mostrarResultados(buscador.busquedaAutor(autor));
-    }
-
-    private static void buscarPorTitulo() {
-        System.out.print("Ingrese el título del libro: ");
-        String titulo = scanner.nextLine();
-        mostrarResultados(buscador.busquedaTitulo(titulo));
-    }
-
-    private static void buscarPorPrecio() {
-        System.out.print("Ingrese el precio exacto: ");
-        double precio = scanner.nextDouble();
-        scanner.nextLine();
-        mostrarResultados(buscador.busquedaPrecio(precio));
-    }
-    */
-
-    private static void mostrarResultados(List<Libro> resultados) {
-    int contador;
-        if (resultados.isEmpty()) {
-            System.out.println(" No se encontraron resultados.");
-        } else {
-            System.out.println("TENGO " + biblioteca.size() + " LIBROS ACTUALMENTE\n");
-            contador=1;
-            for (Libro libro : resultados) {
-                System.out.println("INFORMACIÓN LIBRO " + contador + ":");
-                System.out.println(libro);
-                System.out.println();
-                contador++;
-            }
-        }
-    }
-}
 
 

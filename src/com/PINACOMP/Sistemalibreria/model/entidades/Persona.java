@@ -28,6 +28,10 @@ public class Persona {
         return id;
     }
 
+    public String getNombre() {
+        return nombre;
+    }
+
     public String getNombreCompleto() {
         return nombre + " " + apellidoPaterno;
     }
@@ -44,5 +48,13 @@ public class Persona {
         return sexo;
     }
 
-
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("Su nombre es: ").append(getNombreCompleto());
+        sb.append("\n Su edad es: ").append(edad);
+        sb.append("\nSu sexo es: ").append(sexo);
+        sb.append("\nSu correo es: ").append(correo);
+        return sb.toString();
+    }
 }

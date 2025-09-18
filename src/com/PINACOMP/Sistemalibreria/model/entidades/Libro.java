@@ -49,6 +49,34 @@ public class Libro  {
         return autor;
     }
 
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public void setTitulo(String titulo) {
+        this.titulo = titulo;
+    }
+
+    public void setAutor(Autor autor) {
+        this.autor = autor;
+    }
+
+    public void setPrecio(double precio) {
+        this.precio = precio;
+    }
+
+    public void setIsbn(String isbn) {
+        this.isbn = isbn;
+    }
+
+    public void setGenero(TipoGenero genero) {
+        this.genero = genero;
+    }
+
+    public void setEditorial(String editorial) {
+        this.editorial = editorial;
+    }
+
     @Override
     public String toString() {
         StringBuilder sb= new StringBuilder();

@@ -4,17 +4,18 @@ import com.PINACOMP.Sistemalibreria.model.entidades.Autor;
 import com.PINACOMP.Sistemalibreria.model.entidades.Libro;
 import com.PINACOMP.Sistemalibreria.model.enums.TipoGenero;
 
-import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Biblioteca {
-    public static List<Libro> crearBiblioteca() {
-        //  Función que crea autores y libros con instanciación válida
+    private static final List<Libro> libros = new ArrayList<>();
 
+    // Bloque estático para inicializar una sola vez
+    static {
+        Autor autor1 = new Autor("Gabriel", "Garcia", "Márquez");
+        Autor autor2 = new Autor("Alan", "Oswald", "Moore");
 
-        Autor autor1 = new Autor("Gabriel", "Garcia","Márquez");
-        Autor autor2 = new Autor("Alan", "Oswald","Moore");
-        Libro libro1 = new Libro(
+        libros.add(new Libro(
                 1,
                 "Cien años de soledad",
                 autor1,
@@ -22,9 +23,9 @@ public class Biblioteca {
                 "ISBN-001",
                 TipoGenero.NARRATIVO,
                 "Editorial Sudamericana"
-        );
+        ));
 
-        Libro libro2 = new Libro(
+        libros.add(new Libro(
                 2,
                 "Watchmen",
                 autor2,
@@ -32,9 +33,9 @@ public class Biblioteca {
                 "ISBN-002",
                 TipoGenero.NARRATIVO,
                 "DC Comics"
-        );
+        ));
 
-        Libro libro3 = new Libro(
+        libros.add(new Libro(
                 3,
                 "La casa de los espíritus",
                 autor1,
@@ -42,9 +43,11 @@ public class Biblioteca {
                 "ISBN-003",
                 TipoGenero.NARRATIVO,
                 "Editorial Plaza & Janés"
-        );
+        ));
+    }
 
-        return Arrays.asList(libro1, libro2, libro3);
-
+    // Método para acceder siempre a la misma lista
+    public static List<Libro> obtenerLibros() {
+        return libros;
     }
 }
