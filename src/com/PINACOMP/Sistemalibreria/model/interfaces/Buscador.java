@@ -1,4 +1,4 @@
-package com.PINACOMP.Sistemalibreria.app;
+package com.PINACOMP.Sistemalibreria.model.interfaces;
 //Importación de clases necesarias para el tipo de retorno y parámetros
 import com.PINACOMP.Sistemalibreria.model.entidades.BuscadorObras;
 import com.PINACOMP.Sistemalibreria.model.entidades.Libro;

@@ -85,4 +85,25 @@ public class Reporte {
             System.out.println(" - " + libro);
         }
     }
+    //Método para generar un reporte con stock
+    public void generarReporteStock(List<Libro> libros) {
+        System.out.println(" REPORTE DE STOCK DE LIBROS\n");
+
+        for (Libro libro : libros) {
+            System.out.println("Título: " + libro.getTitulo());
+            System.out.println("Autor: " + libro.getAutor().getNombre());
+            System.out.println("Editorial: " + libro.getEditorial());
+            System.out.println("Stock disponible: " + libro.getStock());
+
+            if (libro.getStock() == 0) {
+                System.out.println("Estado: AGOTADO");
+            } else if (libro.getStock() < 3) {
+                System.out.println(" Estado: Bajo stock");
+            } else {
+                System.out.println(" Estado: Disponible");
+            }
+
+            System.out.println("-----------------------------");
+        }
+    }
 }

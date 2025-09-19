@@ -10,7 +10,7 @@ public class Persona {
     protected TipoSexo sexo;
     protected int id;//acceso desde subclases
     //constructor
-    public Persona(String nombre, String apellidoPaterno, String correo, int edad, TipoSexo sexo, int id) {
+    public Persona(int id,String nombre, String apellidoPaterno, String correo, int edad, TipoSexo sexo) {
         this.id=id;
         this.nombre = nombre;
         this.apellidoPaterno = apellidoPaterno;
@@ -24,6 +24,16 @@ public class Persona {
 
     public String getNombreCompleto() {
         return nombre + " " + apellidoPaterno;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public Persona(int id, String nombre, String apellidoPaterno) {
+        this.id = id;
+        this.nombre = nombre;
+        this.apellidoPaterno = apellidoPaterno;
     }
 
     public String getCorreo() {

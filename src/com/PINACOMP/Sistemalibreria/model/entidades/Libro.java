@@ -14,7 +14,9 @@ public class Libro implements Buscador {
     protected String isbn;
     protected TipoGenero genero;
     protected String editorial;
-    public Libro(int id, String titulo, Autor autor, double precio, String isbn, TipoGenero genero, String editorial) {
+    protected int stock;
+    //constructor
+    public Libro(int id, String titulo, Autor autor, double precio, String isbn, TipoGenero genero, String editorial,int stock) {
         this.id = id;
         this.titulo = titulo;
         this.autor = autor;
@@ -22,6 +24,7 @@ public class Libro implements Buscador {
         this.isbn = isbn;
         this.genero = genero;
         this.editorial = editorial;
+        this.stock = stock;
     }
     //Getters
     public int getId() {
@@ -51,6 +54,12 @@ public class Libro implements Buscador {
     public Autor getAutor() {
         return autor;
     }
+    public int getStock() {
+        return stock;
+    }
+    public void setStock(int stock) {
+        this.stock = stock;
+    }
     //ToStrins representacion textual
     @Override
     public String toString() {
@@ -61,6 +70,7 @@ public class Libro implements Buscador {
         sb.append(" \nPrecio: ").append(precio);
         sb.append(" \nGenero: ").append(genero);
         sb.append(" \nEditorial: ").append(editorial);
+        sb.append(" \nStock disponible: ").append(stock);
         return sb.toString();
     }
     //implementacion de métodos de busqueda
@@ -93,12 +103,23 @@ public class Libro implements Buscador {
     @Override
     public List<Libro> busquedaAutor(String nombre) {
         List<Libro> resultado = new ArrayList<>();
-        if (autor.getNombre().equalsIgnoreCase(nombre)) {
+        String[] palabrasClave = nombre.toLowerCase().split(" ");
+        String nombreAutor = this.autor.getNombre().toLowerCase();
+
+        boolean coincide = true;
+        for (String palabra : palabrasClave) {
+            if (!nombreAutor.contains(palabra)) {
+                coincide = false;
+                break;
+            }
+        }
+
+        if (coincide) {
             resultado.add(this);
         }
+
         return resultado;
     }
-
     //Busca libros por título exacto.
 
     @Override
