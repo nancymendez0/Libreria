@@ -18,12 +18,6 @@ public class Persona {
         this.edad = edad;
         this.sexo = sexo;
     }
-
-    public Persona(String nombre, String apellidoPaterno) {
-        this.nombre = nombre;
-        this.apellidoPaterno = apellidoPaterno;
-    }
-
     public int getId() {
         return id;
     }
@@ -34,6 +28,16 @@ public class Persona {
 
     public String getNombreCompleto() {
         return nombre + " " + apellidoPaterno;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public Persona(int id, String nombre, String apellidoPaterno) {
+        this.id = id;
+        this.nombre = nombre;
+        this.apellidoPaterno = apellidoPaterno;
     }
 
     public String getCorreo() {

@@ -9,13 +9,15 @@ public class Comics extends Libro{
     Tipouniverso universo;
     int volumen;
     Tipoedicion edicion;
+    int stock;
 
-    public Comics(int id, String titulo, Autor autor, double precio, String isbn, TipoGenero genero, String editorial, String personaje, Tipouniverso universo, int volumen, Tipoedicion edicion) {
-        super(id, titulo, autor, precio, isbn, genero, editorial);
+    public Comics(int id, String titulo, Autor autor, double precio, String isbn, TipoGenero genero, String editorial, String personaje, Tipouniverso universo, int volumen, Tipoedicion edicion, int stock) {
+        super(id, titulo, autor, precio, isbn, genero, editorial,stock);
         this.personaje = personaje;
         this.universo = universo;
         this.volumen = volumen;
         this.edicion = edicion;
+        this.stock = stock;
     }
 
     public String getPersonaje() {

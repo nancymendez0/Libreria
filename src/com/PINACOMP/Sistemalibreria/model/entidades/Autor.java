@@ -29,10 +29,10 @@ public class Autor extends Persona {
         this.nacionalidad = nacionalidad;
         this.cantidadLibros = cantidadLibros;
     }
+    public Autor ( int id,String nombre, String apellidoMaterno,String apellidoPaterno){
 
-    public Autor(String nombre, String apellidoPaterno, String apellidoMaterno) {
-        super(nombre, apellidoPaterno);
-        this.apellidoMaterno = apellidoMaterno;
+       super(id,nombre,apellidoPaterno);
+        this.apellidoMaterno=apellidoMaterno;
     }
 
     //Getters , devuelven
