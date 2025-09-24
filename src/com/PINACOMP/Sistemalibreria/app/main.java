@@ -1,183 +1,227 @@
 package com.PINACOMP.Sistemalibreria.app;
+
 import com.PINACOMP.Sistemalibreria.data.Biblioteca;
 import com.PINACOMP.Sistemalibreria.model.entidades.*;
-import com.PINACOMP.Sistemalibreria.model.enums.EstadoOperacion;
-import com.PINACOMP.Sistemalibreria.model.enums.TipoGenero;
-import com.PINACOMP.Sistemalibreria.model.enums.TipoOperacion;
+import com.PINACOMP.Sistemalibreria.model.enums.TipoPuesto;
+import com.PINACOMP.Sistemalibreria.model.enums.TipoSexo;
 import com.PINACOMP.Sistemalibreria.model.interfaces.OperacionBiblioteca;
-import com.sistemalibreria.excepciones.ValidacionUsuarioException;
+import com.PINACOMP.Sistemalibreria.servicios.Empleado;
+import com.PINACOMP.Sistemalibreria.servicios.EmpleadoServicios;
+import com.sistemalibreria.excepciones.*;
+import com.sistemalibreria.excepciones.ValidadorEmpleado;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
+import java.util.function.Function;
 
 public class main {
-    private static Scanner scanner = new Scanner(System.in);
-    private static List<Libro> biblioteca = new ArrayList<>();
-    private static BuscadorObras buscador;
-    private static List<OperacionBiblioteca> operaciones=new ArrayList<>();
+    static final Scanner sc = new Scanner(System.in);
+    static final List<Libro> biblioteca = Biblioteca.crearBiblioteca();
+    static final BuscadorObras buscador = new BuscadorObras(biblioteca) {
+        public List<Libro> buscar(String criterio) {
+            return List.of(); // Implementación vacía
+        }
+    };
+    static final List<OperacionBiblioteca> operaciones = List.of(
+            new Venta(101, LocalDate.now(), biblioteca.get(0), biblioteca.get(0).getPrecio()),
+            new Prestamo(102, LocalDate.now(), 1, biblioteca.get(1), LocalDate.now().plusDays(7)),
+            new Devolucion(103, LocalDate.now(), 102, biblioteca.get(2), false, 0.0)
+    );
+    static final EmpleadoServicios empleados = new EmpleadoServicios();
+
     public static void main(String[] args) {
-        biblioteca = Biblioteca.crearBiblioteca();
-        buscador= new BuscadorObras(biblioteca) {
-            @Override
-            public List<Libro> buscar(String criterio) {
-                return List.of();
-            }
-        };
-       //operacioones de biblioteca
- //Operaciones que afectan stock
-        // Inicializar operaciones con libros de la biblioteca
-        Libro libroVenta = biblioteca.get(0);
-        Libro libroPrestamo = biblioteca.get(1);
-        Libro libroDevolucion = biblioteca.get(2);
-
-        Venta venta = new Venta(101, LocalDate.now(), libroVenta, libroVenta.getPrecio());
-        Prestamo prestamo = new Prestamo(102, LocalDate.now(), 1, libroPrestamo, LocalDate.now().plusDays(7));
-        Devolucion devolucion = new Devolucion(103, LocalDate.now(), 102, libroDevolucion, false, 0.0);
-
-        // usa el primer libro disponible
-
-        operaciones.add(venta);
-        operaciones.add(prestamo);
-        operaciones.add(devolucion);
-        int opcion;
-        do {
-            mostrarMenu();
-            opcion = leerOpcion();
-            ejecutarOpcion(opcion);
-        } while (opcion != 0);
-    }
-
-    private static void mostrarMenu() {
-        System.out.println("\nMENÚ PRINCIPAL");
-        System.out.println("1. Mostrar todos los libros");
-        System.out.println("2. Buscar por género");
-        System.out.println("3. Buscar por autor");
-        System.out.println("4. Buscar por título");
-        System.out.println("5. Buscar por precio");
-        System.out.println("6. Ejemplo de operaciones");
-        System.out.println("0. Salir");
-        System.out.print("Seleccione una opción: ");
-    }
-    //validando entrada de OPCION
-    private static int leerOpcion() {
-        while (!scanner.hasNextInt()) {
-            System.out.println("  Entrada inválida. Ingrese un número entero.");
-            scanner.next(); // descarta entrada incorrecta
-            System.out.print("Seleccione una opción: ");
-        }
-        int opcion = scanner.nextInt();
-        scanner.nextLine(); // limpiar buffer
-        return opcion;
-    }
-
-    private static void ejecutarOpcion(int opcion) {
-        switch (opcion) {
-            case 1, 7 -> mostrarResultados(biblioteca);
-            case 2 -> {
-                System.out.print("Ingrese el género (ej. NARRATIVO): ");
-                String entrada = scanner.nextLine().toUpperCase();
-
-                try {
-                    List<Libro> resultados = buscador.buscarPorGenero(entrada);
-                    mostrarResultados(resultados);
-                } catch (ValidacionUsuarioException e) {
-                    System.out.println("!!! " + e.getMessage());
-                }
-
-            }
-            case 3 -> {
-                System.out.print("Ingrese el nombre del autor: ");
-                String nombre = scanner.nextLine();
-                try {
-                    List<Libro> resultados = buscador.busquedaAutor(nombre);
-                    mostrarResultados(resultados);
-                } catch (ValidacionUsuarioException e) {
-                    System.out.println(" advertencia " + e.getMessage());
-                }
-
-            }
-            case 4 -> {
-                System.out.print("Ingrese el título del libro: ");
-                String titulo = scanner.nextLine();
-                try {
-                    List<Libro> resultados = buscador.busquedaTitulo(titulo);
-                    mostrarResultados(resultados);
-                } catch (ValidacionUsuarioException e) {
-                    System.out.println("advertencia " + e.getMessage());
-                }
-
-            }
-            case 5 -> {
-                System.out.print("Ingrese el precio exacto: ");
-                String entrada = scanner.nextLine();
-                try {
-                    double precio = Double.parseDouble(entrada);
-                    List<Libro> resultados = buscador.busquedaPrecio(precio);
-                    mostrarResultados(resultados);
-                } catch (NumberFormatException e) {
-                    System.out.println(" El precio debe ser un número válido.");
-                } catch (ValidacionUsuarioException e) {
-                    System.out.println(" advertencia " + e.getMessage());
-                }
-
-            }
-            case 6 -> mostrarEjemploOperaciones();
-            case 0 -> System.out.println("Saliendo del sistema...");
-            default -> System.out.println("Opción no válida.");
+        while (true) {
+            int opcion = leerInt(menu());
+            if (opcion == 0) break;
+            ejecutar(opcion);
         }
     }
-    private static void mostrarEjemploOperaciones() {
-        System.out.println("\n--- EJEMPLO DE OPERACIONES ---");
 
-        boolean ventaMostrada = false;
-        boolean prestamoMostrado = false;
-        boolean devolucionMostrada = false;
+    static String menu() {
+        return """
+                MENÚ PRINCIPAL
+                1. Mostrar libros
+                2. Buscar por género
+                3. Buscar por autor
+                4. Buscar por título
+                5. Buscar por precio
+                6. Mostrar operaciones
+                7. Agregar empleado
+                8. Consultar empleado
+                9. Actualizar empleado
+                10. Eliminar empleado
+                11. Mostrar todos los empleados
+                12. Mostrar empleados ordenados por ID
+                0. Salir
+                Opción: """;
+    }
 
+    static void ejecutar(int op) {
+        switch (op) {
+            case 1 -> mostrar(biblioteca);
+            case 2 -> buscar("género", buscador::buscarPorGenero);
+            case 3 -> buscar("autor", buscador::busquedaAutor);
+            case 4 -> buscar("título", buscador::busquedaTitulo);
+            case 5 -> buscarPrecio();
+            case 6 -> resumen();
+            case 7 -> empleado("agregar");
+            case 8 -> empleado("consultar");
+            case 9 -> empleado("actualizar");
+            case 10 -> empleado("eliminar");
+            case 11 -> mostrarTodosLosEmpleados();
+            case 12 -> mostrarEmpleadosOrdenadosPorId();
+            default -> System.out.println("Opción inválida.");
+        }
+    }
+
+    static int leerInt(String msg) {
+        System.out.print(msg);
+        while (!sc.hasNextInt()) {
+            System.out.print("Inválido. " + msg);
+            sc.next();
+        }
+        int val = sc.nextInt();
+        sc.nextLine();
+        return val;
+    }
+
+    static String leer(String msg) {
+        System.out.print(msg);
+        return sc.nextLine();
+    }
+
+    static void buscar(String tipo, Function<String, List<Libro>> f) {
+        try {
+            mostrar(f.apply(leer("Ingrese " + tipo + ": ")));
+        } catch (ValidacionUsuarioException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    static void buscarPrecio() {
+        try {
+            mostrar(buscador.busquedaPrecio(Double.parseDouble(leer("Precio: "))));
+        } catch (Exception e) {
+            System.out.println("Precio inválido.");
+        }
+    }
+
+    static void mostrar(List<Libro> libros) {
+        if (libros.isEmpty()) System.out.println("No hay resultados.");
+        else for (int i = 0; i < libros.size(); i++)
+            System.out.println("LIBRO " + (i + 1) + ":\n" + libros.get(i) + "\n");
+    }
+
+    static void resumen() {
+        Set<String> tipos = new HashSet<>();
         for (OperacionBiblioteca op : operaciones) {
-            switch (op.getTipoOperacion()) {
-                case VENTA -> {
-                    if (!ventaMostrada) {
-                        System.out.println(" Venta:");
-                        op.mostrarResumen();
-                        ventaMostrada = true;
-                    }
-                }
-                case PRESTAMO -> {
-                    if (!prestamoMostrado) {
-                        System.out.println(" Préstamo:");
-                        op.mostrarResumen();
-                        prestamoMostrado = true;
-                    }
-                }
-                case DEVOLUCION -> {
-                    if (!devolucionMostrada) {
-                        System.out.println(" Devolución:");
-                        op.mostrarResumen();
-                        devolucionMostrada = true;
-                    }
-                }
-            }
-
-            if (ventaMostrada && prestamoMostrado && devolucionMostrada) break;
+            String tipo = op.getTipoOperacion().name();
+            if (tipos.add(tipo)) System.out.println(tipo + ":");
+            op.mostrarResumen();
+            if (tipos.size() == 3) break;
         }
     }
-    private static void mostrarResultados(List<Libro> resultados) {
-    int contador;
-        if (biblioteca.isEmpty()) {
-            System.out.println(" No se encontraron resultados.");
-        } else {
-            System.out.println("TENGO " + resultados.size() + " LIBROS ACTUALMENTE\n");
-            contador=1;
-            for (Libro libro : resultados) {
-                System.out.println("INFORMACIÓN LIBRO " + contador + ":");
-                System.out.println(libro);
-                System.out.println();
-                contador++;
+
+    static void empleado(String accion) {
+        int id = leerInt("ID: ");
+
+        if (accion.equals("consultar")) {
+            Empleado e = empleados.obtenerEmpleado(id);
+            if (e != null) {
+                System.out.println("ID: " + e.getId() + " | " + e.getNombreCompleto() +
+                        " | " + e.getCorreo() + " | " + e.getPuesto());
+            } else {
+                System.out.println("No existe un empleado con ese ID.");
             }
+            return;
         }
+
+        if (accion.equals("eliminar")) {
+            if (empleados.existeEmpleado(id)) {
+                empleados.eliminarEmpleado(id);
+                System.out.println("Empleado eliminado.");
+            } else {
+                System.out.println("No existe un empleado con ese ID.");
+            }
+            return;
+        }
+
+        System.out.println("""
+                Ingrese los datos del empleado respetando el formato. Ejemplo:
+
+                Nombre: Laura
+                Apellido: Martínez
+                Correo: laura.martinez@correo.com
+                Sexo: FEMENINO
+                Puesto: AUXILIAR
+                Edad: 28
+
+                Reglas:
+                - Nombre y apellido: solo letras y espacios
+                - Correo: debe contener '@' y terminar en '.com'
+                - Sexo válido: """ + Arrays.toString(TipoSexo.values()) + """
+                - Puesto válido: """ + Arrays.toString(TipoPuesto.values()) + """
+                - Edad: número entero positivo
+                """);
+
+        String n = leer("Nombre: ");
+        String a = leer("Apellido: ");
+        String c = leer("Correo: ");
+        String s = leer("Sexo: ").toUpperCase();
+        String pStr = leer("Puesto: ").toUpperCase();
+        int edad = leerInt("Edad: ");
+
+        try {
+            ValidadorEmpleado.validarNombre(n);
+            ValidadorEmpleado.validarNombre(a);
+            ValidadorEmpleado.validarCorreo(c);
+            ValidadorEmpleado.validarEdad(edad);
+            TipoSexo sexo = ValidadorEmpleado.validarSexo(s);
+            TipoPuesto puesto = ValidadorEmpleado.validarEnum(TipoPuesto.class, pStr, new PuestoNoReconocidoException("Puesto inválido: " + pStr));
+
+            Empleado emp = new Empleado(id, n, a, c, edad, sexo, puesto);
+
+            if (accion.equals("agregar")) {
+                empleados.agregarEmpleado(emp);
+                System.out.println("Empleado agregado correctamente.");
+            } else {
+                empleados.actualizarEmpleado(id, emp);
+                System.out.println("Empleado actualizado correctamente.");
+                System.out.println("Datos actualizados: " + emp.getNombreCompleto() + " | " + emp.getCorreo() + " | " + emp.getPuesto());
+            }
+
+        } catch (RuntimeException ex) {
+            System.out.println("Error: " + ex.getMessage());
+        }
+    }
+
+    static void mostrarTodosLosEmpleados() {
+        Map<Integer, Empleado> mapa = empleados.obtenerTodos();
+        if (mapa.isEmpty()) {
+            System.out.println("No hay empleados registrados.");
+            return;
+        }
+
+        for (Empleado e : mapa.values()) {
+            System.out.println("ID: " + e.getId() + " | " + e.getNombreCompleto() +
+                    " | " + e.getCorreo() + " | " + e.getPuesto());
+        }
+    }
+
+    static void mostrarEmpleadosOrdenadosPorId() {
+        Map<Integer, Empleado> mapa = empleados.obtenerTodos();
+        if (mapa.isEmpty()) {
+            System.out.println("No hay empleados registrados.");
+            return;
+        }
+
+        mapa.entrySet().stream()
+                .sorted(Map.Entry.comparingByKey())
+                .forEach(entry -> {
+                    Empleado e = entry.getValue();
+                    System.out.println("ID: " + entry.getKey() + " | " +
+                            e.getNombreCompleto() + " | " +
+                            e.getCorreo() + " | " + e.getPuesto());
+                });
     }
 }
-
-

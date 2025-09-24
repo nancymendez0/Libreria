@@ -9,6 +9,7 @@ import com.sistemalibreria.excepciones.ValidacionUsuarioException;
  */
 public class PuestoNoReconocidoException extends ValidacionUsuarioException {
 
+
     /**
      * Constructor que valida si el puesto ingresado es reconocido.
      * @param entrada texto ingresado por el usuario
