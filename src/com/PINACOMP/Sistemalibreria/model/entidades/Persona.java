@@ -30,12 +30,14 @@ public class Persona {
         return nombre + " " + apellidoPaterno;
     }
 
-    public String getNombre() {
-        return nombre;
-    }
 
     public Persona(int id, String nombre, String apellidoPaterno) {
         this.id = id;
+        this.nombre = nombre;
+        this.apellidoPaterno = apellidoPaterno;
+    }
+    public Persona( String nombre, String apellidoPaterno) {
+
         this.nombre = nombre;
         this.apellidoPaterno = apellidoPaterno;
     }

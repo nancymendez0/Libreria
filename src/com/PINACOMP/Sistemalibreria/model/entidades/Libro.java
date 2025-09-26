@@ -60,6 +60,35 @@ public class Libro implements Buscador {
     public void setStock(int stock) {
         this.stock = stock;
     }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public void setTitulo(String titulo) {
+        this.titulo = titulo;
+    }
+
+    public void setAutor(Autor autor) {
+        this.autor = autor;
+    }
+
+    public void setPrecio(double precio) {
+        this.precio = precio;
+    }
+
+    public void setIsbn(String isbn) {
+        this.isbn = isbn;
+    }
+
+    public void setGenero(TipoGenero genero) {
+        this.genero = genero;
+    }
+
+    public void setEditorial(String editorial) {
+        this.editorial = editorial;
+    }
+
     //ToStrins representacion textual
     @Override
     public String toString() {

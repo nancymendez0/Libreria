@@ -7,16 +7,17 @@ import java.util.regex.Pattern;
 public class AutorNoEncontradoException extends BúsquedaInvalidaException {
     private static final Pattern SOLO_LETRAS_Y_ESPACIOS = Pattern.compile("^[A-Za-zÁÉÍÓÚÑáéíóúñ ]+$");
 
-    public AutorNoEncontradoException(String nombre) {
-        super(validar(nombre));
+    public AutorNoEncontradoException(String mensaje) {
+        super(mensaje);
     }
 
-    private static String validar(String nombre) {
+    public static String validar(String nombre) throws AutorNoEncontradoException {
         if (nombre == null || nombre.trim().isEmpty()) {
-            return "El nombre del autor no puede estar vacío.";
+            throw new AutorNoEncontradoException("El nombre del autor no puede estar vacío.") ;
         }
         if (!SOLO_LETRAS_Y_ESPACIOS.matcher(nombre).matches()) {
-            return "El nombre del autor contiene caracteres inválidos. Solo se permiten letras y espacios.";
+            throw new AutorNoEncontradoException("El nombre del autor contiene caracteres inválidos. Solo se permiten letras y espacios.") ;
+
         }
         return "No se encontró ningún autor con el nombre '" + nombre + "'.";
     }

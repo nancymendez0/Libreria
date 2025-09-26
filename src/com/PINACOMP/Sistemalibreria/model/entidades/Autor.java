@@ -31,8 +31,13 @@ public class Autor extends Persona {
     }
     public Autor ( int id,String nombre, String apellidoMaterno,String apellidoPaterno){
 
-       super(id,nombre,apellidoPaterno);
+        super(id,nombre,apellidoPaterno);
         this.apellidoMaterno=apellidoMaterno;
+    }
+
+    public Autor(String nombre, String apellidoPaterno, String apellidoMaterno) {
+        super(nombre,apellidoPaterno);
+        this.apellidoMaterno = apellidoMaterno;
     }
 
     //Getters , devuelven

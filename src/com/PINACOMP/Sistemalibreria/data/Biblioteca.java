@@ -22,7 +22,7 @@ public class Biblioteca {
                 299.0,
                 "ISBN-001",
                 TipoGenero.NARRATIVO,
-                "Editorial Sudamericana"
+                "Editorial Sudamericana", 34
         ));
 
         libros.add(new Libro(
@@ -32,7 +32,7 @@ public class Biblioteca {
                 349.0,
                 "ISBN-002",
                 TipoGenero.NARRATIVO,
-                "DC Comics"
+                "DC Comics", 10
         ));
 
         libros.add(new Libro(
@@ -42,7 +42,7 @@ public class Biblioteca {
                 279.0,
                 "ISBN-003",
                 TipoGenero.NARRATIVO,
-                "Editorial Plaza & Janés"
+                "Editorial Plaza & Janés",12
         ));
     }
 

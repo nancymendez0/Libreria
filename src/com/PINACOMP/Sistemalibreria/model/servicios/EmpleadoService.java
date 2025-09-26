@@ -6,6 +6,7 @@ import com.PINACOMP.Sistemalibreria.model.entidades.Autor;
 import com.PINACOMP.Sistemalibreria.model.entidades.Empleado;
 import com.PINACOMP.Sistemalibreria.model.entidades.Libro;
 import com.PINACOMP.Sistemalibreria.model.enums.TipoGenero;
+import com.sistemalibreria.excepciones.AutorNoEncontradoException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -45,17 +46,23 @@ public class EmpleadoService {
 
         System.out.println("Titulo: ");
         String titulo = scanner.nextLine();
+        Autor autor = null;
+        try{
+            System.out.println("Autor (Nombre)");
+            String nombreAutor = scanner.nextLine();
+            AutorNoEncontradoException.validar(nombreAutor);
+            System.out.println("Autor (Apellido Paterno)");
+            String apellidoPaterno = scanner.nextLine();
 
-        System.out.println("Autor (Nombre)");
-        String nombreAutor = scanner.nextLine();
+            System.out.println("Autor (Apellido Materno)");
+            String apellidoMaterno = scanner.nextLine();
+            autor = new Autor( nombreAutor, apellidoPaterno, apellidoMaterno);
+        }catch (AutorNoEncontradoException e){
+            System.out.println("Error: " + e.getMessage());
+            return;
+        }
 
-        System.out.println("Autor (Apellido Paterno)");
-        String apellidoPaterno = scanner.nextLine();
 
-        System.out.println("Autor (Apellido Materno)");
-        String apellidoMaterno = scanner.nextLine();
-
-        Autor autor = new Autor( nombreAutor, apellidoPaterno, apellidoMaterno);
 
         System.out.println("Precio: (Libro)");
         double precio= scanner.nextDouble();
@@ -75,8 +82,11 @@ public class EmpleadoService {
 
         System.out.println("Editorial: ");
         String editorial = scanner.nextLine();
+        System.out.println("Dame la cantidad de libros en el stock");
+        int stock= scanner.nextInt();
+        scanner.nextLine();
 
-        Libro nuevoLibro= new Libro (id,titulo,autor,precio,isbn,generoSeleccionado,editorial);
+        Libro nuevoLibro= new Libro (id,titulo,autor,precio,isbn,generoSeleccionado,editorial, stock);
         libros.add(nuevoLibro);
         System.out.println("Libro agregado correctamente: " + titulo);
     }

@@ -36,7 +36,7 @@ public class MenuService {
     }
     public void menuAdmin(String administrador){
         System.out.println("\nBienvenido " + administrador +"\n ¿Qué deseas realizar");
-        System.out.println("1. Mostrar información de emplados");
+        System.out.println("1. Mostrar información de empleados");
         System.out.println("2. Calcular el pago de un empleado");
         System.out.println("3. Agregar a empleado");
         System.out.println("4. Actualizar información empleados");
@@ -63,8 +63,8 @@ public class MenuService {
         switch (opcion) {
             case 1 -> serviciosAdmin.mostrarEmpleados(oficina);
             case 2 -> ad1.calcularSueldoMensual(oficina);
+
             /*
-            case 2 -> buscarPorGenero();
             case 3 -> buscarPorAutor();
             case 4 -> buscarPorTitulo();
             case 5 -> buscarPorPrecio();
