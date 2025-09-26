@@ -12,8 +12,9 @@ public class MenuService {
     static List<Libro> biblioteca = servicios.obtenerLibros();
     static EmpleadoService serviciosEmpleados = new EmpleadoService();
     static AdminService serviciosAdmin = new AdminService();
-    //static List<Empleado> oficina = serviciosAdmin.obtenerEmpleados();
+    //static List<Empleado> oficina = serviciosAdmin.mostrarTodos();
     static Administrador ad1 = new Administrador("lalo9807","12345");
+    static Empleado e1=null;
     public void menuCliente(){
         System.out.println("\nBienvenido a nuestro Menú");
         System.out.println("1. Mostrar todos los libros");
@@ -59,12 +60,12 @@ public class MenuService {
             default -> System.out.println(" Opción no válida.");
         }
     }
-    public void accionesAdmin(int opcion){
+    public void accionesAdmin(int opcion , Scanner scanner){
         switch (opcion) {
             case 1 -> serviciosAdmin.mostrarTodos();
            // case 2 -> ad1.calcularSueldoMensual(oficina);
-            /*case 3 -> serviciosAdmin.agregarEmpleado(oficina);
-            case 4 -> buscarPorTitulo();
+            case 3 -> serviciosAdmin.agregarEmpleado( scanner,e1);
+            /*case 4 -> buscarPorTitulo();
             case 5 -> buscarPorPrecio();
 
              */

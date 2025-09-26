@@ -50,7 +50,7 @@ public class main {
                             do {
                                 menu.menuAdmin(nombreUsuario);
                                 opcionAdmin=leerOpcion();
-                                menu.accionesAdmin(opcionAdmin);
+                                menu.accionesAdmin(opcionAdmin, scanner);
 
                             }while (opcionAdmin!=0);
 

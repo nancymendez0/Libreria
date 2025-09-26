@@ -3,10 +3,7 @@ package com.PINACOMP.Sistemalibreria.model.servicios;
 import com.PINACOMP.Sistemalibreria.data.Empleados;
 import com.PINACOMP.Sistemalibreria.model.entidades.Empleado;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 
 public class AdminService {
@@ -19,14 +16,24 @@ public class AdminService {
     }
     */
         private final Map<Integer,Empleado>empleado = new HashMap<>();
-
-       /* public void agregarEmpleado(Empleado empleado) {
-            int id = empleado.getId();
-            if (empleado.contains(id)) {
+        public AdminService(){
+            List<Empleado> empleados = Empleados.crearEmpleados();
+            for(Empleado e : empleados){
+                empleado.put(e.getId(), e);
+            }
+        }
+        public void agregarEmpleado(Scanner scanner , Empleado e) {
+            System.out.println("Dame el id del empleado = " );
+            int id = scanner.nextInt();
+            if (empleado.containsKey(id)) {
                 throw new IllegalArgumentException("Ya existe un empleado con ID: " + id);
             }
-            empleado.put(id, empleado);
-        }*/
+            empleado.put(id,e);
+            scanner.nextLine();
+            System.out.println("Dame el nombre del empleado " );
+            String nombre = scanner.nextLine();
+            empleado.put(id,e);
+        }
 
         public void actualizarEmpleado(int id, Empleado nuevoEmpleado) {
             if (!empleado.containsKey(id)) {
