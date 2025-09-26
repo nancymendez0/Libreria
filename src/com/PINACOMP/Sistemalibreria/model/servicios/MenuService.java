@@ -12,7 +12,7 @@ public class MenuService {
     static List<Libro> biblioteca = servicios.obtenerLibros();
     static EmpleadoService serviciosEmpleados = new EmpleadoService();
     static AdminService serviciosAdmin = new AdminService();
-    static List<Empleado> oficina = serviciosAdmin.obtenerEmpleados();
+    //static List<Empleado> oficina = serviciosAdmin.obtenerEmpleados();
     static Administrador ad1 = new Administrador("lalo9807","12345");
     public void menuCliente(){
         System.out.println("\nBienvenido a nuestro Menú");
@@ -61,11 +61,9 @@ public class MenuService {
     }
     public void accionesAdmin(int opcion){
         switch (opcion) {
-            case 1 -> serviciosAdmin.mostrarEmpleados(oficina);
-            case 2 -> ad1.calcularSueldoMensual(oficina);
-
-            /*
-            case 3 -> buscarPorAutor();
+            case 1 -> serviciosAdmin.mostrarTodos();
+           // case 2 -> ad1.calcularSueldoMensual(oficina);
+            /*case 3 -> serviciosAdmin.agregarEmpleado(oficina);
             case 4 -> buscarPorTitulo();
             case 5 -> buscarPorPrecio();
 

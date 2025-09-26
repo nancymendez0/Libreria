@@ -42,4 +42,8 @@ public class Empleado  extends Persona{
         sb.append("\nSu sueldo es: ").append(getSueldoSemanal());
         return super.toString() + sb.toString();
     }
+
+
+
+
 }
