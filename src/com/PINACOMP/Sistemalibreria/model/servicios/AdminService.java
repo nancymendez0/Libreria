@@ -2,6 +2,8 @@ package com.PINACOMP.Sistemalibreria.model.servicios;
 
 import com.PINACOMP.Sistemalibreria.data.Empleados;
 import com.PINACOMP.Sistemalibreria.model.entidades.Empleado;
+import com.PINACOMP.Sistemalibreria.model.enums.TipoPuesto;
+import com.PINACOMP.Sistemalibreria.model.enums.TipoSexo;
 
 import java.util.*;
 
@@ -33,6 +35,40 @@ public class AdminService {
             System.out.println("Dame el nombre del empleado " );
             String nombre = scanner.nextLine();
             empleado.put(id,e);
+            System.out.println(" Dame el apellido paterno "  );
+            String apellidoPaterno = scanner.nextLine();
+            empleado.put(id,e);
+            System.out.println(" Dame el correo "  );
+            String correo = scanner.nextLine();
+            empleado.put(id,e);
+            System.out.println("Dame edad " );
+            int edad = scanner.nextInt();
+            empleado.put(id,e);
+            System.out.println("Selecciona tu tipo de sexo del empleado " );
+            TipoSexo []sexos = TipoSexo.values();
+            for(int i = 0; i < sexos.length; i++){
+                System.out.println((i+1) + ". " + sexos[i]);
+            }
+            int opcion = scanner.nextInt();
+            scanner.nextLine();
+            System.out.println(" Número de empleado " );
+            int numero = scanner.nextInt();
+            empleado.put(id,e);
+            System.out.println(" Sueldo semanal" );
+            double salario = scanner.nextDouble();
+            empleado.put(id,e);
+            System.out.println("contraseña");
+            String password = scanner.nextLine();
+            empleado.put(id,e);
+            System.out.println("Selecciona tu tipo de puesto del empleado " );
+            TipoPuesto[]puestos = TipoPuesto.values();
+            for(int i = 0; i < puestos.length; i++){
+                System.out.println((i+1) + ". " + puestos[i]);
+            }
+            int opcionPuesto = scanner.nextInt();
+            scanner.nextLine();
+
+
         }
 
         public void actualizarEmpleado(int id, Empleado nuevoEmpleado) {
