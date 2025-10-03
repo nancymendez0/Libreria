@@ -12,7 +12,7 @@ public class GeneroNoReconocidoException extends BúsquedaInvalidaException {
      * @param generoIngresado texto ingresado por el usuario
      */
     public GeneroNoReconocidoException(String generoIngresado) {
-        super(validar(generoIngresado));
+        super(generoIngresado);
     }
 
     /**
@@ -20,30 +20,30 @@ public class GeneroNoReconocidoException extends BúsquedaInvalidaException {
      * @param genero texto ingresado
      * @return mensaje de error semántico
      */
-    private static String validar(String genero) {
+    public static void validarGenero(String genero) throws GeneroNoReconocidoException {
         if (genero == null || genero.isBlank()) {
-            return "El género no puede estar vacío.";
+            throw new GeneroNoReconocidoException("El género no puede estar vacío.") ;
         }
 
         String entrada = genero.trim().toUpperCase();
 
         if (!entrada.matches("^[A-ZÁÉÍÓÚÑ]+$")) {
-            return "El género contiene caracteres inválidos. Solo se permiten letras mayúsculas sin espacios ni símbolos.";
+            throw new GeneroNoReconocidoException("El género contiene caracteres inválidos. Solo se permiten letras mayúsculas sin espacios ni símbolos.");
         }
 
         for (TipoGenero tipo : TipoGenero.values()) {
             if (tipo.name().equals(entrada)) {
-                return "Género válido."; // No se lanza si es válido
+                return; // No se lanza si es válido
             }
         }
 
-        return "Género no reconocido: '" + genero + "'. Los géneros válidos son: " + obtenerGenerosValidos();
+        throw new GeneroNoReconocidoException("Género no reconocido: '" + genero + "'. Los géneros válidos son: " + obtenerGenerosValidos()) ;
     }
 
     /**
      * Devuelve una lista formateada de los géneros definidos en el enum TipoGenero.
      */
-    private static String obtenerGenerosValidos() {
+    public static String obtenerGenerosValidos() {
         StringBuilder generos = new StringBuilder();
         for (TipoGenero tipo : TipoGenero.values()) {
             generos.append(tipo.name()).append(", ");

@@ -22,7 +22,7 @@ public class main {
                     do {
                         menu.menuCliente();
                         opcionCliente = leerOpcion();
-                        menu.accionesCliente(opcionCliente);
+                        menu.accionesCliente(opcionCliente, scanner);
                     }while(opcionCliente!=0);
                 }else if(opcion==2){
                     System.out.println("¿Qué tipo de empleado eres \n 1-Vendedor \n 2-Administrador \n 0-Salir");

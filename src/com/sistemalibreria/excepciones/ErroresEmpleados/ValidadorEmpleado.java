@@ -1,7 +1,7 @@
-package com.sistemalibreria.excepciones;
-import com.sistemalibreria.excepciones.*;
+package com.sistemalibreria.excepciones.ErroresEmpleados;
 import com.PINACOMP.Sistemalibreria.model.enums.TipoSexo;
 import com.PINACOMP.Sistemalibreria.model.enums.TipoPuesto;
+import com.sistemalibreria.excepciones.NombreInvalidoException;
 
 import java.util.Arrays;
 
@@ -20,11 +20,13 @@ public class ValidadorEmpleado {
         /**
          * Valida que el correo tenga formato correcto: contiene '@' y termina en '.com'.
          */
+        /*
         public static void validarCorreo(String correo) {
             if (correo == null || !correo.matches("^[\\w.-]+@[\\w.-]+\\.com$")) {
                 throw new CorreoInvalidoException("El correo debe contener '@' y terminar en '.com'.");
             }
         }
+        */
 
         /**
          * Valida que la edad sea un número entero positivo.

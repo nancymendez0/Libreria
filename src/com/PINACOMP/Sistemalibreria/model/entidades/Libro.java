@@ -93,7 +93,8 @@ public class Libro implements Buscador {
     @Override
     public String toString() {
         StringBuilder sb= new StringBuilder();
-        sb.append("Titulo: ").append(titulo);
+        sb.append("ID: ").append(id);
+        sb.append("\nTitulo: ").append(titulo);
         sb.append("\nAutor: ").append(autor);
         sb.append(" \nISBN: ").append(isbn);
         sb.append(" \nPrecio: ").append(precio);
@@ -163,9 +164,9 @@ public class Libro implements Buscador {
     //Busca libros por precio exacto.
 
     @Override
-    public List<Libro> busquedaPrecio(double precio) {
+    public List<Libro> busquedaPrecio(double precioMin, double precioMax) {
         List<Libro> resultado = new ArrayList<>();
-        if (this.precio == precio) {
+        if (this.precio>= precioMin && this.precio<=precioMax) {
             resultado.add(this);
         }
         return resultado;

@@ -3,20 +3,20 @@ package com.sistemalibreria.excepciones;
 /**
  * Excepción lanzada cuando el precio ingresado es inválido.
  */
-public class PrecioInvalidoException extends BúsquedaInvalidaException {
+public class PrecioInvalidoException extends Exception {
     public PrecioInvalidoException(String entrada) {
-        super(validar(entrada));
+        super(entrada);
     }
 
-    private static String validar(String entrada) {
+    public static double validar(String entrada) throws PrecioInvalidoException{
         try {
             double precio = Double.parseDouble(entrada);
             if (precio <= 0) {
-                return "El precio debe ser mayor que cero.";
+                throw new PrecioInvalidoException("El precio debe ser mayor que cero.");
             }
-            return "Precio válido.";
+            return precio;
         } catch (NumberFormatException e) {
-            return "El precio ingresado no es numérico.";
+            throw new PrecioInvalidoException("El precio ingresado no es numérico.");
         }
     }
 }

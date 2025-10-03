@@ -1,4 +1,4 @@
-package com.PINACOMP.Sistemalibreria.model.entidades;
+/*package com.PINACOMP.Sistemalibreria.model.entidades;
 
 import com.PINACOMP.Sistemalibreria.model.interfaces.Buscador;
 import com.PINACOMP.Sistemalibreria.model.enums.TipoGenero;
@@ -11,7 +11,7 @@ import com.sistemalibreria.excepciones.*;
  * Clase que implementa la interfaz Buscador para realizar búsquedas literarias
  * sobre una colección de libros. Aplica validación semántica y lógica técnica
  * para cada criterio de búsqueda.
- */
+
 public abstract class BuscadorObras implements Buscador {
 
     private final List<Libro> biblioteca;
@@ -19,7 +19,7 @@ public abstract class BuscadorObras implements Buscador {
     /**
      * Constructor que recibe una colección de libros.
      * @param biblioteca lista de libros disponibles para búsqueda
-     */
+
     public BuscadorObras(List<Libro> biblioteca) {
         this.biblioteca = biblioteca;
     }
@@ -28,7 +28,7 @@ public abstract class BuscadorObras implements Buscador {
      * Busca libros por género literario.
      * @param genero el género a buscar
      * @return lista de libros que coinciden con el género
-     */
+
     @Override
     public List<Libro> busquedaGeneroLibro(TipoGenero genero) {
         //validacion
@@ -81,7 +81,7 @@ public abstract class BuscadorObras implements Buscador {
      * Busca libros por nombre de autor.
      * @param nombre nombre del autor
      * @return lista de libros escritos por ese autor
-     */
+
     @Override
     public List<Libro> busquedaAutor(String nombre) {
         //validacion
@@ -111,7 +111,7 @@ public abstract class BuscadorObras implements Buscador {
      * Busca libros por título.
      * @param titulo título del libro
      * @return lista de libros cuyo título coincide
-     */
+
     @Override
     public List<Libro> busquedaTitulo(String titulo) {
         //validacion
@@ -142,7 +142,7 @@ public abstract class BuscadorObras implements Buscador {
      * Busca libros por precio exacto.
      * @param precio valor monetario del libro
      * @return lista de libros con ese precio
-     */
+
     @Override
     public List<Libro> busquedaPrecio(double precio) {
         //validacion
@@ -161,4 +161,4 @@ public abstract class BuscadorObras implements Buscador {
         }
         return resultado;
     }
-}
+}*/

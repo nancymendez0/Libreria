@@ -1,6 +1,6 @@
 package com.PINACOMP.Sistemalibreria.model.interfaces;
 //Importación de clases necesarias para el tipo de retorno y parámetros
-import com.PINACOMP.Sistemalibreria.model.entidades.BuscadorObras;
+//import com.PINACOMP.Sistemalibreria.model.entidades.BuscadorObras;
 import com.PINACOMP.Sistemalibreria.model.entidades.Libro;
 import com.PINACOMP.Sistemalibreria.model.enums.TipoGenero;
 import java.util.List;
@@ -42,12 +42,8 @@ public interface Buscador {
      */
     List<Libro> busquedaTitulo(String titulo);
 
-    /**
-     * Busca libros por precio exacto.
-     * @param precio valor monetario del libro
-     * @return lista de libros con ese precio
-     */
-    List<Libro> busquedaPrecio(double precio);
+
+    List<Libro> busquedaPrecio(double precioMin, double precioMax);
 
 
 }

@@ -1,4 +1,4 @@
-package com.sistemalibreria.excepciones;
+package com.sistemalibreria.excepciones.ErroresEmpleados;
 
 import com.PINACOMP.Sistemalibreria.model.enums.TipoPuesto;
 import com.sistemalibreria.excepciones.ValidacionUsuarioException;

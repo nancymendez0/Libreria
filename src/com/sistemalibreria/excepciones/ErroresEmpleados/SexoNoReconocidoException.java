@@ -1,4 +1,4 @@
-package com.sistemalibreria.excepciones;
+package com.sistemalibreria.excepciones.ErroresEmpleados;
 
 public class SexoNoReconocidoException extends RuntimeException {
     public SexoNoReconocidoException(String mensaje) {

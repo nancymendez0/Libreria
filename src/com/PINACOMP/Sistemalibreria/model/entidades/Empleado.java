@@ -2,8 +2,12 @@ package com.PINACOMP.Sistemalibreria.model.entidades;
 
 import com.PINACOMP.Sistemalibreria.model.enums.TipoPuesto;
 import com.PINACOMP.Sistemalibreria.model.enums.TipoSexo;
+import com.PINACOMP.Sistemalibreria.model.interfaces.BuscadorEmpleados;
 
-public class Empleado  extends Persona{
+import java.util.ArrayList;
+import java.util.List;
+
+public class Empleado  extends Persona implements BuscadorEmpleados{
     int numEmpleado;
     double sueldoSemanal;
     String contraseña;
@@ -33,6 +37,17 @@ public class Empleado  extends Persona{
         return puesto;
     }
 
+    public void setNumEmpleado(int numEmpleado) {
+        this.numEmpleado = numEmpleado;
+    }
+
+    public void setSueldoSemanal(double sueldoSemanal) {
+        this.sueldoSemanal = sueldoSemanal;
+    }
+
+    public void setPuesto(TipoPuesto puesto) {
+        this.puesto = puesto;
+    }
 
     @Override
     public String toString() {
@@ -44,6 +59,49 @@ public class Empleado  extends Persona{
     }
 
 
+    @Override
+    public List<Empleado> busquedaId(int id) {
+        List<Empleado> resultado = new ArrayList<>();
+        if (this.id==id){
+            resultado.add(this);
 
+        }
+        return resultado;
+    }
 
+    @Override
+    public List<Empleado> busquedaNombre(String nombre) {
+        List<Empleado> resultado = new ArrayList<>();
+        if(this.nombre.equalsIgnoreCase(nombre)){
+            resultado.add(this);
+        }
+        return resultado;
+    }
+
+    @Override
+    public List<Empleado> busquedaApellido(String apellido) {
+        List<Empleado> reultado = new ArrayList<>();
+        if(this.apellidoPaterno.equalsIgnoreCase(apellido)){
+            reultado.add(this);
+        }
+        return reultado;
+    }
+
+    @Override
+    public List<Empleado> busquedaSexo(TipoSexo sexo) {
+        List<Empleado> resultado = new ArrayList<>();
+        if(this.sexo==sexo){
+            resultado.add(this);
+        }
+        return resultado;
+    }
+
+    @Override
+    public List<Empleado> busquedaPuesto(TipoPuesto puesto) {
+        List<Empleado> resultado = new ArrayList<>();
+        if(this.puesto == puesto){
+            resultado.add(this);
+        }
+        return resultado;
+    }
 }

@@ -11,7 +11,7 @@ public class AutorNoEncontradoException extends BúsquedaInvalidaException {
         super(mensaje);
     }
 
-    public static String validar(String nombre) throws AutorNoEncontradoException {
+    public static void validar(String nombre) throws AutorNoEncontradoException {
         if (nombre == null || nombre.trim().isEmpty()) {
             throw new AutorNoEncontradoException("El nombre del autor no puede estar vacío.") ;
         }
@@ -19,7 +19,7 @@ public class AutorNoEncontradoException extends BúsquedaInvalidaException {
             throw new AutorNoEncontradoException("El nombre del autor contiene caracteres inválidos. Solo se permiten letras y espacios.") ;
 
         }
-        return "No se encontró ningún autor con el nombre '" + nombre + "'.";
+        throw new AutorNoEncontradoException("No se encontró ningún autor con el nombre '" + nombre + "'.") ;
     }
 }
 
