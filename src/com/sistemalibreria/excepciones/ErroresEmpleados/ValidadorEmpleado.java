@@ -22,7 +22,7 @@ public class ValidadorEmpleado {
          */
         /*
         public static void validarCorreo(String correo) {
-            if (correo == null || !correo.matches("^[\\w.-]+@[\\w.-]+\\.com$")) {
+            if (correo == null || !correo.matches("^+[\\w.-]@[\\w.-]+\\.com$")) {
                 throw new CorreoInvalidoException("El correo debe contener '@' y terminar en '.com'.");
             }
         }
