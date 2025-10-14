@@ -1,14 +1,11 @@
 package com.PINACOMP.Sistemalibreria.app;
 import com.PINACOMP.Sistemalibreria.model.entidades.*;
-import com.PINACOMP.Sistemalibreria.model.servicios.EmpleadoService;
-import com.PINACOMP.Sistemalibreria.model.servicios.LibroService;
 import com.PINACOMP.Sistemalibreria.model.servicios.MenuService;
 
-import java.util.List;
 import java.util.Scanner;
 
 public class main {
-    private static Scanner scanner = new Scanner(System.in);
+    public static Scanner scanner = new Scanner(System.in);
     static MenuService menu = new MenuService();
     static Administrador ad1 = new Administrador("lalo9807","12345");
     public static void main(String[] args) {
@@ -50,7 +47,7 @@ public class main {
                             do {
                                 menu.menuAdmin(nombreUsuario);
                                 opcionAdmin=leerOpcion();
-                                menu.accionesAdmin(opcionAdmin, scanner);
+                                menu.accionesAdmin(opcionAdmin, scanner, scanner);
 
                             }while (opcionAdmin!=0);
 

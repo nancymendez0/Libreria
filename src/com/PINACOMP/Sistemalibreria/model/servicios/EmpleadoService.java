@@ -15,7 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-import static com.sistemalibreria.excepciones.ErroresEmpleados.NombreYApellidosInvalidoException.validarNombre;
+
 import static com.sistemalibreria.excepciones.GeneroNoReconocidoException.validarGenero;
 import static com.sistemalibreria.excepciones.PrecioInvalidoException.validar;
 
@@ -125,14 +125,14 @@ public class EmpleadoService {
                     
                     System.out.println("Nombre del autor: ");
                     String entrada=scanner.nextLine();
-                    String nombre = validarNombre(entrada);
+                    //String nombre = validarNombre(entrada);
                     System.out.println("Apellido paterno: ");
                     String entrada2=scanner.nextLine();
-                    String paterno = validarNombre(entrada2);
+                   // String paterno = validarNombre(entrada2);
                     System.out.println("Apellido materno: ");
                     String entrada3=scanner.nextLine();
-                    String materno = validarNombre(entrada3);
-                    libroActualizar.setAutor(new Autor(nombre, paterno, materno));
+                    //String materno = validarNombre(entrada3);
+                    //libroActualizar.setAutor(new Autor(nombre, paterno, materno));
                     System.out.println("Autor actualizado correctamente.");
                 }catch (NombreYApellidosInvalidoException e){
                     System.out.println("Error " +e.getMessage());
@@ -185,6 +185,8 @@ public class EmpleadoService {
 
 
     }
+
+
     public void actualizarLibro(Scanner scanner) {
         System.out.println("=== ACTUALIZAR LIBRO ===");
         System.out.println("¿Cómo deseas buscar el libro?");

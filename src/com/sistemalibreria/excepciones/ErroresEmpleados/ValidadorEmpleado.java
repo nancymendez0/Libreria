@@ -4,6 +4,7 @@ import com.PINACOMP.Sistemalibreria.model.enums.TipoPuesto;
 import com.sistemalibreria.excepciones.NombreInvalidoException;
 
 import java.util.Arrays;
+import java.util.regex.Pattern;
 
 
 public class ValidadorEmpleado {
@@ -11,24 +12,36 @@ public class ValidadorEmpleado {
         /**
          * Valida que el nombre o apellido contenga solo letras y espacios.
          */
-        public static void validarNombre(String nombre) {
-            if (nombre == null || !nombre.matches("^[A-Za-zÁÉÍÓÚáéíóúÑñ\\s]+$")) {
-                throw new NombreInvalidoException("El nombre debe contener solo letras y espacios.");
-            }
+        private static final Pattern PATRON_NOMBRE_COMPLETO = Pattern.compile("^[A-Za-zÁÉÍÓÚáéíóúÑñ]+(\\s[A-Za-zÁÉÍÓÚáéíóúÑñ]+){1,2}$");
+
+    public static void validarNombreCompleto(String nombreCompleto) {
+        if (nombreCompleto == null || nombreCompleto.trim().isEmpty()) {
+            throw new NombreYApellidosInvalidoException("El nombre completo no puede estar vacío.");
         }
+        if (!PATRON_NOMBRE_COMPLETO.matcher(nombreCompleto.trim()).matches()) {
+            throw new NombreYApellidosInvalidoException("Formato inválido. Usa nombre y uno o dos apellidos. Ejemplo: 'Juan Pérez Gómez'.");
+        }
+    }
 
         /**
          * Valida que el correo tenga formato correcto: contiene '@' y termina en '.com'.
          */
-        /*
-        public static void validarCorreo(String correo) {
-            if (correo == null || !correo.matches("^[\\w.-]+@[\\w.-]+\\.com$")) {
-                throw new CorreoInvalidoException("El correo debe contener '@' y terminar en '.com'.");
+        private static final Pattern PATRON_CORREO = Pattern.compile("^[\\w.-]+@[\\w.-]+\\.[A-Za-z]{2,}$");
+
+
+    public static void validarCorreo(String correo) {
+            if (correo == null || correo.trim().isEmpty()) {
+                throw new CorreoInvalidoException("El correo no puede estar vacío.");
+            }
+            if (!PATRON_CORREO.matcher(correo).matches()) {
+                throw new CorreoInvalidoException("El correo no tiene un formato válido. Ejemplo: usuario@dominio.com");
             }
         }
-        */
 
-        /**
+
+
+
+    /**
          * Valida que la edad sea un número entero positivo.
          */
         public static void validarEdad(int edad) {
@@ -78,5 +91,6 @@ public class ValidadorEmpleado {
             );
         }
 
-    }
+
+}
 
