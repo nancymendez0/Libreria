@@ -95,7 +95,6 @@ public class GeneradorEmpleadoExcepciones {
         return new Empleado(id, nombre, apellidoPaterno,  correo, edad, sexo, numEmpleado, sueldoSemanal, contraseña, puesto);
     }
 
-  //jdskjbkdsjfdd
-    System.out.println("h");
+
 
 }

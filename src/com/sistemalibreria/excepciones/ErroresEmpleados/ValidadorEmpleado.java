@@ -12,9 +12,9 @@ public class ValidadorEmpleado {
         /**
          * Valida que el nombre o apellido contenga solo letras y espacios.
          */
-        private static final Pattern PATRON_NOMBRE_COMPLETO = Pattern.compile("^[A-Za-zÁÉÍÓÚáéíóúÑñ]+(\\s[A-Za-zÁÉÍÓÚáéíóúÑñ]+){1,2}$");
+        private static final Pattern PATRON_NOMBRE_COMPLETO = Pattern.compile("^[A-Za-zÁÉÍÓÚáéíóúÑñ]+(\\s[A-Za-zÁÉÍÓÚáéíóúÑñ]+){0,2}$");
 
-    public static void validarNombreCompleto(String nombreCompleto) {
+    public static void validarNombreCompleto(String nombreCompleto) throws NombreYApellidosInvalidoException {
         if (nombreCompleto == null || nombreCompleto.trim().isEmpty()) {
             throw new NombreYApellidosInvalidoException("El nombre completo no puede estar vacío.");
         }
@@ -29,7 +29,7 @@ public class ValidadorEmpleado {
         private static final Pattern PATRON_CORREO = Pattern.compile("^[\\w.-]+@[\\w.-]+\\.[A-Za-z]{2,}$");
 
 
-    public static void validarCorreo(String correo) {
+    public static void validarCorreo(String correo) throws CorreoInvalidoException {
             if (correo == null || correo.trim().isEmpty()) {
                 throw new CorreoInvalidoException("El correo no puede estar vacío.");
             }
@@ -44,7 +44,7 @@ public class ValidadorEmpleado {
     /**
          * Valida que la edad sea un número entero positivo.
          */
-        public static void validarEdad(int edad) {
+        public static void validarEdad(int edad) throws EdadInvalidaException {
             if (edad <= 0) {
                 throw new EdadInvalidaException("La edad debe ser un número entero positivo.");
             }
@@ -67,8 +67,8 @@ public class ValidadorEmpleado {
         /**
          * Valida el sexo como TipoSexo.
          */
-        public static TipoSexo validarSexo(String entrada) {
-            return validarEnum(TipoSexo.class, entrada, new SexoNoReconocidoException("Sexo no reconocido: " + entrada));
+        public static TipoSexo validarSexo(String entrada) throws SexoNoReconocidoException{
+            throw new SexoNoReconocidoException("Sexo no reconocido: " );
         }
 
         /**

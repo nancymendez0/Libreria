@@ -6,16 +6,17 @@ import com.PINACOMP.Sistemalibreria.model.entidades.Empleado;
 import com.PINACOMP.Sistemalibreria.model.enums.TipoPuesto;
 import com.PINACOMP.Sistemalibreria.model.enums.TipoSexo;
 import com.PINACOMP.Sistemalibreria.model.interfaces.BuscadorEmpleados;
+import com.sistemalibreria.excepciones.ErroresEmpleados.*;
 
 import java.util.*;
 
 import static com.PINACOMP.Sistemalibreria.app.main.scanner;
 
-public class AdminService implements BuscadorEmpleados {
+public class AdminService2 implements BuscadorEmpleados {
 
     private final Map<Integer, Empleado> empleado = new HashMap<>();
 
-    public AdminService() {
+    public AdminService2() {
 
         for (Empleado e : Empleados.obtenerEmpleados()) {
             empleado.put(e.getId(), e);
@@ -46,42 +47,20 @@ public class AdminService implements BuscadorEmpleados {
     }
 
     public void agregarEmpleado(Scanner scanner) {
+        String idTexto = leerConValidacion(scanner, "Ingrese el ID del empleado");
+        if (idTexto == null) return;
+        int id = Integer.parseInt(idTexto);
 
-        try {
-            String idTexto = leerConValidacion(scanner, "Ingrese el ID del empleado");
-            if (idTexto == null) return;
-            int id = Integer.parseInt(idTexto);
-
-            if (empleado.containsKey(id)) {
-                System.out.println("✘ Ya existe un empleado con ese ID.");
-                return;
-            }
-
-            GeneradorEmpleadoExcepciones generador = new GeneradorEmpleadoExcepciones();
-
-            String nombre = leerConValidacion(scanner, "Ingrese el nombre");
-            String apellidoPaterno = leerConValidacion(scanner, "Ingrese el apellido paterno");
-            String apellidoMaterno = leerConValidacion(scanner, "Ingrese el apellido materno");
-            if (nombre == null || apellidoPaterno == null || apellidoMaterno == null) return;
-
-            generador.setNombreYApellidos(nombre, apellidoPaterno, apellidoMaterno);
-
-            String correo = leerConValidacion(scanner, "Ingrese el correo");
-            if (correo == null) return;
-            generador.setCorreo(correo);
-
-            String edadTexto = leerConValidacion(scanner, "Ingrese la edad");
-            if (edadTexto == null) return;
-            int edad = Integer.parseInt(edadTexto);
-            generador.setEdad(edad);
-
-            Empleado nuevo = generador.construir();
-            empleado.put(id, nuevo);
-            System.out.println("✔ Empleado agregado correctamente.");
-
-        } catch (RuntimeException e) {
-            System.out.println("✘ Error: " + e.getMessage());
+        if (empleado.containsKey(id)) {
+            System.out.println("✘ Ya existe un empleado con ese ID.");
+            return;
         }
+        Empleado nuevo = capturarDatosEmpleado(scanner, id);
+        empleado.put(id, nuevo);
+        System.out.println("✔ Empleado agregado correctamente.");
+
+
+
     }
 
     public void actualizarEmpleado(Scanner scanner) {
@@ -114,41 +93,110 @@ public class AdminService implements BuscadorEmpleados {
         }
     }
 
-    private Empleado capturarDatosEmpleado(Scanner scanner, int id) {
-        String nombre = leerConValidacion(scanner, "Nombre");
-        String apellidoPaterno = leerConValidacion(scanner, "Apellido paterno");//valida 3 saltos para no seguir guardando datos
-        String apellidoMaterno = leerConValidacion(scanner, "Apellido materno");
-        String correo = leerConValidacion(scanner, "Correo");
-        String edadTexto = leerConValidacion(scanner, "Edad");
-        String numTexto = leerConValidacion(scanner, "Número de empleado");
-        String sueldoTexto = leerConValidacion(scanner, "Sueldo semanal");
-        String contraseña = leerConValidacion(scanner, "Contraseña");
+    public Empleado capturarDatosEmpleado(Scanner scanner, int id) {
+        String entradaGlobal;//verifique que no haya datos vacios
+        String nombre=null, apellidoP=null, apellidoM=null, correo=null, contraseña=null;
+        int edad=0, numEmpleado=0;
+        double sueldo=0.0;
+        while(true){
+            entradaGlobal = leerConValidacion(scanner, "Nombre");
+            try {
+                ValidadorEmpleado.validarNombreCompleto(entradaGlobal);
+                nombre = entradaGlobal;
+                break;
+
+            } catch (NombreYApellidosInvalidoException e) {
+                System.out.println(e.getMessage());
+            }
+
+        }
+        while(true){
+            entradaGlobal = leerConValidacion(scanner, "Apellido paterno");//valida 3 saltos para no seguir guardando datos
+            try {
+                ValidadorEmpleado.validarNombreCompleto(entradaGlobal);
+                apellidoP = entradaGlobal;
+                break;
+            } catch (NombreYApellidosInvalidoException e) {
+                System.out.println(e.getMessage());
+            }
+
+        }
+        while(true){
+            entradaGlobal = leerConValidacion(scanner, "Apellido materno");
+            try {
+                ValidadorEmpleado.validarNombreCompleto(entradaGlobal);
+                apellidoM = entradaGlobal;
+                break;
+            } catch (NombreYApellidosInvalidoException e) {
+                System.out.println(e.getMessage());
+            }
+
+        }
+        while(true){
+
+            entradaGlobal = leerConValidacion(scanner, "Correo");
+            try {
+                ValidadorEmpleado.validarCorreo(entradaGlobal);
+                correo = entradaGlobal;
+                break;
+            } catch (CorreoInvalidoException e) {
+                System.out.println(e.getMessage());
+            }
+        }
+        while(true){
+            entradaGlobal = leerConValidacion(scanner, "Edad");
+            int entradaNum = 0;
+            try {
+                entradaNum = Integer.parseInt(entradaGlobal);
+                ValidadorEmpleado.validarEdad(entradaNum);
+                edad = entradaNum;
+                break;
+            } catch (EdadInvalidaException e) {
+                System.out.println(e.getMessage());
+            }
+
+        }
+        while(true){
+
+            entradaGlobal = leerConValidacion(scanner, "Sueldo semanal");
+            try{
+                double entradaDouble = Double.parseDouble(entradaGlobal);
+                SueldoInvalidoException.validar(entradaDouble);
+                sueldo=entradaDouble;
+                break;
+            }catch (SueldoInvalidoException e){
+                System.out.println(e.getMessage());
+            }
+        }
+
+        entradaGlobal = leerConValidacion(scanner, "Número de empleado");
+        int entradaNum = Integer.parseInt(entradaGlobal);
+        numEmpleado = entradaNum;
+
+
+        while(true){
+
+        entradaGlobal = leerConValidacion(scanner, "Contraseña");
+        try{
+            ContraseniaInvalidaException.validar(entradaGlobal);
+            contraseña=entradaGlobal;
+            break;
+        }catch (ContraseniaInvalidaException e){
+            System.out.println(e.getMessage());
+        }
+        }
+
         //detiene el proceso si los campos estan nulos por salto de linea
-        if (nombre == null || apellidoPaterno == null || apellidoMaterno == null ||
-                correo == null || edadTexto == null || numTexto == null ||
-                sueldoTexto == null || contraseña == null) {
+        if (entradaGlobal == null) {
             throw new RuntimeException("✘ Datos incompletos.");
         }
-        //convierte los textos en numeros
-        int edad = Integer.parseInt(edadTexto);
-        int numEmpleado = Integer.parseInt(numTexto);
-        double sueldo = Double.parseDouble(sueldoTexto);
-
         TipoSexo sexo = seleccionarEnum(scanner, TipoSexo.values(), "Sexo");
         TipoPuesto puesto = seleccionarEnum(scanner, TipoPuesto.values(), "Puesto");
-       //construye el empleado con las validaciones
-        return new GeneradorEmpleadoExcepciones()
-                .setId(id)
-                .setNombreYApellidos(nombre, apellidoPaterno, apellidoMaterno)
-                .setCorreo(correo)
-                .setEdad(edad)
-                .setSexo(sexo)
-                .setNumEmpleado(numEmpleado)
-                .setSueldoSemanal(sueldo)
-                .setContraseña(contraseña)
-                .setPuesto(puesto)
-                .construir();
+        //construye el empleado con las validaciones
+        //Validar nombre y apellidos
+        return new Empleado(id, nombre, apellidoP, apellidoM, edad, sexo, numEmpleado, sueldo, contraseña, puesto);
     }
+
     //confirma antes de actualizar o eliminar un empleado
     private boolean confirmar(Scanner scanner, String mensaje) {
         System.out.print(mensaje);
@@ -177,6 +225,7 @@ public class AdminService implements BuscadorEmpleados {
             }
         }
     }
+
     private void mostrarEmpleado(Empleado e) {
         System.out.println("ID: " + e.getId());
         System.out.println("Nombre: " + e.getNombre());
@@ -364,8 +413,8 @@ public class AdminService implements BuscadorEmpleados {
 
                     System.out.println(" Lista de empleados:");
                     for (Empleado e : empleado.values()) {
-                        System.out.println("ID: " + e.getId() + " | " + e.getNombreCompleto()
-                                + " | " + e.getCorreo() + " | " + e.getPuesto());
+                        System.out.println("ID: " + e.getId() + " | " + e.getNombre() + " | " + e.getApellidoPaterno()
+                                + " | " + e.getCorreo() + " | " + e.getPuesto() + " | " +e.getSueldoSemanal());
                     }
                     return true;
                 }

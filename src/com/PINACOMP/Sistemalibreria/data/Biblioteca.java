@@ -41,7 +41,7 @@ public class Biblioteca {
                 autor1,
                 279.0,
                 "ISBN-003",
-                TipoGenero.NARRATIVO,
+                TipoGenero.DIDACTICO,
                 "Editorial Plaza & Janés",12
         ));
     }

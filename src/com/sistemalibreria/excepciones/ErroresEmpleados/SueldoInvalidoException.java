@@ -4,7 +4,7 @@ public class SueldoInvalidoException extends Exception{
     public SueldoInvalidoException(String mensaje){super(mensaje);}
 
     //Métodos que validan
-    public static String validar(int sueldo) throws SueldoInvalidoException{
+    public static String validar(double sueldo) throws SueldoInvalidoException{
 
         if (sueldo==0){
             throw new SueldoInvalidoException("No puedes tener un sueldo vacio");

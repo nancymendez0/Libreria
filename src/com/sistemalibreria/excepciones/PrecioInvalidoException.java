@@ -8,9 +8,9 @@ public class PrecioInvalidoException extends Exception {
         super(entrada);
     }
 
-    public static double validar(String entrada) throws PrecioInvalidoException{
+    public static double validar(double precio) throws PrecioInvalidoException{
         try {
-            double precio = Double.parseDouble(entrada);
+
             if (precio <= 0) {
                 throw new PrecioInvalidoException("El precio debe ser mayor que cero.");
             }

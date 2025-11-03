@@ -9,7 +9,7 @@ public class ContraseniaInvalidaException extends Exception{
 
     //validando metodos
 
-    public String validar(String contrasenia) throws ContraseniaInvalidaException{
+    public static String validar(String contrasenia) throws ContraseniaInvalidaException{
         if(contrasenia==null || contrasenia.trim().isEmpty()  ){
             throw new ContraseniaInvalidaException("La contraseña no puede ser vacia");
         }

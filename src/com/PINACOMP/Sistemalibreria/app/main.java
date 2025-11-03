@@ -11,7 +11,7 @@ public class main {
     public static void main(String[] args) {
         int opcion;
         System.out.println("BIENVENIDO A LIBRERIA ETERNAS");
-        System.out.println("¿Qué tipo de usuario eres:  \n 1-Cliente \n 2-Empleado   \n 0-Salir" );
+        System.out.println("¿Qué tipo de usuario eres(Digita el número correspondiente): \n 1-Cliente \n 2-Empleado   \n 0-Salir" );
         opcion = leerOpcion();
         while(opcion!=0){
                 if (opcion==1){
@@ -47,7 +47,7 @@ public class main {
                             do {
                                 menu.menuAdmin(nombreUsuario);
                                 opcionAdmin=leerOpcion();
-                                menu.accionesAdmin(opcionAdmin, scanner, scanner);
+                                menu.accionesAdmin(opcionAdmin, scanner);
 
                             }while (opcionAdmin!=0);
 
@@ -63,9 +63,36 @@ public class main {
         System.out.println("Gracias por usar el Sistema de librerias Eternas");
         System.out.println("¡Hasta pronto!");
         }
-    private static int leerOpcion() {
-        int opcion = scanner.nextInt();
-        scanner.nextLine(); // Limpiar buffer
+    public static int leerOpcion() {
+        boolean entradaValida=false;
+        int opcion=0;
+        while(!entradaValida){
+            if(scanner.hasNextInt()){
+                opcion = scanner.nextInt();
+                entradaValida=true;
+                scanner.nextLine();
+            }else{
+                System.out.println("Entrada inválida. Porfavor ingresa un número entero");
+                scanner.nextLine();
+            }
+        }
+
+        return opcion;
+    }
+    public static double leerOpcionDouble() {
+        boolean entradaValida=false;
+        double opcion=0;
+        while(!entradaValida){
+            if(scanner.hasNextDouble()){
+                opcion = scanner.nextDouble();
+                entradaValida=true;
+                scanner.nextLine();
+            }else{
+                System.out.println("Entrada inválida. Porfavor ingresa una cantidad numérica(con punto decimal)");
+                scanner.nextLine();
+            }
+        }
+
         return opcion;
     }
     private static String leerDatos() {
