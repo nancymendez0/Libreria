@@ -26,7 +26,7 @@ public class Venta implements OperacionBiblioteca {
         this.libro = libro;
         this.precio = precio;
 
-        procesarVenta();
+        //procesarVenta();
     }
 
 

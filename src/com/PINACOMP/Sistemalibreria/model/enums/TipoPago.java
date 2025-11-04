@@ -16,24 +16,4 @@ public enum TipoPago {
         //Da formato , conviertiendo la primer letra en mayúscula y une con el resto de la cadena
         return nombre.substring(0, 1).toUpperCase() + nombre.substring(1);
     }
-    public static TipoPago Seleccionador(Scanner scanner){
-        System.out.println("Ingrese el tipo de pago");
-        TipoPago[] tipos = TipoPago.values();//convierte enum a un arreglo
-        for(int i=0;i<tipos.length;i++){//re
-            System.out.println((i+1)+"-"+values()[i].name());
-        }
-        while (true){
-            String opciont = scanner.nextLine();
-            try{
-                int opciont=Integer.parseInt(entrada);
-                if(opciont<1 || opciont>values().length){
-                    return values()[opciont-1];
-                }
-                System.out.println("invalido");
-            }catch (NumberFormatException e){
-                System.out.println("invalido");
-            }
-        }
-
-    }
 }

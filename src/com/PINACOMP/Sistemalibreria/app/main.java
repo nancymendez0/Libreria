@@ -1,5 +1,7 @@
 package com.PINACOMP.Sistemalibreria.app;
 import com.PINACOMP.Sistemalibreria.model.entidades.*;
+import com.PINACOMP.Sistemalibreria.model.enums.TipoGenero;
+import com.PINACOMP.Sistemalibreria.model.enums.TipoPago;
 import com.PINACOMP.Sistemalibreria.model.servicios.MenuService;
 import com.sistemalibreria.excepciones.ErroresEmpleados.CorreoInvalidoException;
 import com.sistemalibreria.excepciones.ErroresEmpleados.ValidadorEmpleado;
@@ -18,6 +20,7 @@ public class main {
         opcion = leerOpcion();
         while(opcion!=0){
                 if (opcion==1){
+                    int idCli= 14;
                     String correoCli= null;
                     //obteniendo correo
                     while(true){
@@ -30,12 +33,30 @@ public class main {
                             System.out.println(e.getMessage());
                         }
                     }
+                    //Obtener  tipo pago
+                        System.out.println("Seleccione el tipo de pago");
+                        TipoPago[] tipos = TipoPago.values();//convierte enum a un arreglo
+                        for(int i=0;i<tipos.length;i++){//re
+                            System.out.println((i+1)+"-"+tipos[i].name());
+                        }
+                        TipoPago tipoSeleccionado = TipoPago.Desconocido; //Valor por defecto
+                        while(true){
+                            int opcionPago=leerOpcion();
+                            if (opcionPago>=1 && opcionPago<= tipos.length){
+                                tipoSeleccionado = tipos[opcionPago-1];
+                                break;
+                            }else{
+                                System.out.println("Opcion fuera del rango");
+                            }
+                        }
+                        Cliente cli = new Cliente(idCli,correoCli,tipoSeleccionado);
+
 
                     int opcionCliente;
                     do {
                         menu.menuCliente();
                         opcionCliente = leerOpcion();
-                        menu.accionesCliente(opcionCliente, scanner);
+                        menu.accionesCliente(opcionCliente, scanner, cli);
                     }while(opcionCliente!=0);
                 }else if(opcion==2){
                     System.out.println("¿Qué tipo de empleado eres \n 1-Vendedor \n 2-Administrador \n 0-Salir");
@@ -111,7 +132,7 @@ public class main {
 
         return opcion;
     }
-    private static String leerDatos() {
+    public static String leerDatos() {
         String valor = scanner.nextLine();
         //scanner.nextLine(); // Limpiar buffer
         return valor;

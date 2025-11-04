@@ -15,18 +15,17 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-import static com.PINACOMP.Sistemalibreria.app.main.leerOpcion;
-import static com.PINACOMP.Sistemalibreria.app.main.leerOpcionDouble;
+import static com.PINACOMP.Sistemalibreria.app.main.*;
 
 public class MenuService {
     static ClienteService servicios = new ClienteService();
     static List<Libro> biblioteca = servicios.obtenerLibros();
     static EmpleadoService serviciosEmpleados = new EmpleadoService();
     static AdminService2 serviciosAdmin = new AdminService2();
+    static VentaService serviciosDeVenta = new VentaService();
     //static List<Empleado> oficina = serviciosAdmin.mostrarTodos();
     static Administrador ad1 = new Administrador("lalo9807","12345");
-    static Cliente cli = new Cliente() {
-    }
+
     static Empleado e1=null;
     public void menuCliente(){
         System.out.println("\nBienvenido a nuestro Menú");
@@ -61,7 +60,7 @@ public class MenuService {
         System.out.println("0. Salir");
         System.out.print("Seleccione una opción: ");
     }
-    public void accionesCliente(int opcion, Scanner scanner){
+    public void accionesCliente(int opcion, Scanner scanner, Cliente cliente){
         switch (opcion) {
             case 1 -> servicios.mostrarLibros(biblioteca);
 
@@ -150,6 +149,16 @@ public class MenuService {
                 }
 
             }
+            case 6 ->{
+                System.out.println("¿Qué titulo del libro deseas comprar?");
+                servicios.mostrarLibros(biblioteca);
+                System.out.println("Ingresa el titulo");
+                String tituloCompra=leerDatos();
+                serviciosDeVenta.venderPorTitulo(tituloCompra,cliente,biblioteca);
+
+
+            }
+
             case 0 -> System.out.println(" Saliendo del sistema...");
             default -> System.out.println(" Opción no válida.");
         }
