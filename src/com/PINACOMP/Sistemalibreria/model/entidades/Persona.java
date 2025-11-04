@@ -18,6 +18,10 @@ public class Persona {
         this.edad = edad;
         this.sexo = sexo;
     }
+    public Persona(int id, String correo){
+        this.id=id;
+        this.correo=correo;
+    }
     public int getId() {
         return id;
     }

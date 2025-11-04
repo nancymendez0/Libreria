@@ -1,6 +1,7 @@
 package com.PINACOMP.Sistemalibreria.model.servicios;
 
 import com.PINACOMP.Sistemalibreria.model.entidades.Administrador;
+import com.PINACOMP.Sistemalibreria.model.entidades.Cliente;
 import com.PINACOMP.Sistemalibreria.model.entidades.Empleado;
 import com.PINACOMP.Sistemalibreria.model.entidades.Libro;
 import com.PINACOMP.Sistemalibreria.model.enums.TipoGenero;
@@ -24,6 +25,8 @@ public class MenuService {
     static AdminService2 serviciosAdmin = new AdminService2();
     //static List<Empleado> oficina = serviciosAdmin.mostrarTodos();
     static Administrador ad1 = new Administrador("lalo9807","12345");
+    static Cliente cli = new Cliente() {
+    }
     static Empleado e1=null;
     public void menuCliente(){
         System.out.println("\nBienvenido a nuestro Menú");

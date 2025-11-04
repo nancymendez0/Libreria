@@ -15,24 +15,20 @@ public class Venta implements OperacionBiblioteca {
 
     // Atributos específicos de la venta
     private final Libro libro;
+    private final Cliente cliente;
     private final double precio;
 
     // Constructor
-    public Venta(int idOperacion, LocalDate fecha, Libro libro, double precio) {
+    public Venta(int idOperacion, LocalDate fecha, Cliente cliente, Libro libro, double precio) {
         this.idOperacion = idOperacion;
         this.fecha = fecha;
+        this.cliente=cliente;
         this.libro = libro;
         this.precio = precio;
 
         procesarVenta();
     }
 
-    public Venta(int idOperacion, LocalDate now, EstadoOperacion estadoOperacion, double precio, int idOperacion1, LocalDate fecha, Libro libro, double precio1) {
-        this.idOperacion = idOperacion1;
-        this.fecha = fecha;
-        this.libro = libro;
-        this.precio = precio1;
-    }
 
     // Lógica de venta con validación de stock y estado
     private void procesarVenta() {

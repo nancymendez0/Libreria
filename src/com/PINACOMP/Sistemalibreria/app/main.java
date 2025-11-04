@@ -1,6 +1,8 @@
 package com.PINACOMP.Sistemalibreria.app;
 import com.PINACOMP.Sistemalibreria.model.entidades.*;
 import com.PINACOMP.Sistemalibreria.model.servicios.MenuService;
+import com.sistemalibreria.excepciones.ErroresEmpleados.CorreoInvalidoException;
+import com.sistemalibreria.excepciones.ErroresEmpleados.ValidadorEmpleado;
 
 import java.util.Scanner;
 
@@ -8,6 +10,7 @@ public class main {
     public static Scanner scanner = new Scanner(System.in);
     static MenuService menu = new MenuService();
     static Administrador ad1 = new Administrador("lalo9807","12345");
+
     public static void main(String[] args) {
         int opcion;
         System.out.println("BIENVENIDO A LIBRERIA ETERNAS");
@@ -15,6 +18,19 @@ public class main {
         opcion = leerOpcion();
         while(opcion!=0){
                 if (opcion==1){
+                    String correoCli= null;
+                    //obteniendo correo
+                    while(true){
+                        try {
+                            System.out.println("Ingresa tu correo: ");
+                            correoCli=leerDatos();
+                            ValidadorEmpleado.validarCorreo(correoCli);
+                            break;
+                        }catch (CorreoInvalidoException e){
+                            System.out.println(e.getMessage());
+                        }
+                    }
+
                     int opcionCliente;
                     do {
                         menu.menuCliente();

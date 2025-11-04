@@ -1,6 +1,5 @@
 package com.PINACOMP.Sistemalibreria.model.servicios;
 
-import com.PINACOMP.Sistemalibreria.constructores.GeneradorEmpleadoExcepciones;
 import com.PINACOMP.Sistemalibreria.data.Empleados;
 import com.PINACOMP.Sistemalibreria.model.entidades.Empleado;
 import com.PINACOMP.Sistemalibreria.model.enums.TipoPuesto;
@@ -104,7 +103,6 @@ public class AdminService2 implements BuscadorEmpleados {
                 ValidadorEmpleado.validarNombreCompleto(entradaGlobal);
                 nombre = entradaGlobal;
                 break;
-
             } catch (NombreYApellidosInvalidoException e) {
                 System.out.println(e.getMessage());
             }

@@ -21,7 +21,6 @@ public class Empleados {
         empleados.add(new Empleado(8,"Sofia","Martinez","sofia.mtnez@yahoo.com",31, TipoSexo.Femenino,55334455,2400,"smartinez31",TipoPuesto.VENDEDOR));
         empleados.add(new Empleado(9,"Diego","Castillo","diegocas@gmail.com",38, TipoSexo.Masculino,55667788,2700,"dcastillo38",TipoPuesto.VENDEDOR));
 
-
     }
     //metodo para obtener siempre a los mismo empleados
     public static List<Empleado> obtenerEmpleados(){
