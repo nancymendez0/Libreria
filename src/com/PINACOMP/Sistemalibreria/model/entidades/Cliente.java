@@ -10,6 +10,11 @@ public  class Cliente extends Persona{
     private int telefono;
     private String direccion;
     private TipoPago pago;
+    //constructor para prestamo
+    public Cliente(int id, String correo, String direccion) {
+        super(id, correo);
+        this.direccion = direccion;
+    }
     //constructor que inicializa todos los atributos del cliente incluyendo los heredados de persona
     public Cliente(
             int id,

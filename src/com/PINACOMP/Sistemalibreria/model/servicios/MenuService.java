@@ -158,7 +158,15 @@ public class MenuService {
 
 
             }
+            case 7 -> {
+                System.out.println("¿Qué título del libro deseas llevar a casa en prestamo?");
+                servicios.mostrarLibros(biblioteca); // muestra libros disponibles
+                System.out.println("Ingresa el título");
+                String tituloPrestamo = leerDatos();
 
+                PrestamoService servicioPrestamo = new PrestamoService();
+                servicioPrestamo.prestarPorTitulo(tituloPrestamo, cliente, biblioteca);
+            }
             case 0 -> System.out.println(" Saliendo del sistema...");
             default -> System.out.println(" Opción no válida.");
         }

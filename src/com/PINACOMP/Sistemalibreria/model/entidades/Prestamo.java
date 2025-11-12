@@ -24,13 +24,13 @@ public class Prestamo implements OperacionBiblioteca {
 
     //constructor que inicializa los atributos del préstamo incluyendo los heredados
    //Consructor Actualizado
-    public Prestamo(int idOperacion, LocalDate fechaOperacion, int idCliente, Libro libro, LocalDate fechaDevolucionEstimada) {
+    public Prestamo(int idOperacion, LocalDate fechaOperacion, Cliente cliente, Libro libro) {
         this.idOperacion = idOperacion;
         this.fechaOperacion = fechaOperacion;
         this.fecha = fechaOperacion; // para cumplir con la interfaz
-        this.idCliente = idCliente;
+        this.idCliente = cliente.getId(); // ← extrae el ID del objeto Cliente
         this.libro = libro;
-        this.fechaDevolucionEstimada = fechaDevolucionEstimada;
+        this.fechaDevolucionEstimada = fechaOperacion.plusDays(14); // ← ejemplo: 2 semanas
         this.devuelto = false;
         this.estadoOperacion = EstadoOperacion.HABILITADA;
 
