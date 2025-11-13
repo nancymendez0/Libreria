@@ -6,6 +6,7 @@ import com.PINACOMP.Sistemalibreria.model.enums.TipoOperacion;
 import com.PINACOMP.Sistemalibreria.model.interfaces.OperacionBiblioteca;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 //Representa una operacion de la biblioteca , prestamo de libro en el sistema de la biblioteca
 public class Prestamo implements OperacionBiblioteca {
@@ -33,13 +34,13 @@ public class Prestamo implements OperacionBiblioteca {
         this.fechaDevolucionEstimada = fechaOperacion.plusDays(14); // ← ejemplo: 2 semanas
         this.devuelto = false;
         this.estadoOperacion = EstadoOperacion.HABILITADA;
+        this.librosPrestados= new ArrayList<>();
+        this.librosPrestados.add(libro);
 
-        validarDisponibilidad();
+        //validarDisponibilidad();
     }
 
-    public Prestamo(int idOperacion, LocalDate now, TipoOperacion tipoOperacion, EstadoOperacion estadoOperacion, LocalDate now1) {
-    }
-
+/*
     private void validarDisponibilidad() {
         if (libro.getStock() > 0) {
             libro.setStock(libro.getStock() - 1);
@@ -49,6 +50,8 @@ public class Prestamo implements OperacionBiblioteca {
             System.out.println(" No se puede realizar el préstamo. El libro '" + libro.getTitulo() + "' está agotado.");
         }
     }
+    */
+
     public void registrarDevolucion(LocalDate fechaReal) {
         if (!devuelto) {
             this.devuelto = true;

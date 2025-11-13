@@ -4,6 +4,7 @@ import com.PINACOMP.Sistemalibreria.data.PrestamoData;
 import com.PINACOMP.Sistemalibreria.model.entidades.Cliente;
 import com.PINACOMP.Sistemalibreria.model.entidades.Libro;
 import com.PINACOMP.Sistemalibreria.model.entidades.Prestamo;
+import com.PINACOMP.Sistemalibreria.model.enums.EstadoOperacion;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -29,6 +30,10 @@ public class PrestamoService {
             System.out.println(" El libro '" + libroDisponible.getTitulo() + "' está agotado.");
             return;
         }
+        if (libroDisponible.getStock() > 0) {
+            libroDisponible.setStock(libroDisponible.getStock() - 1);
+            System.out.println(" Préstamo realizado: " + libroDisponible.getTitulo() + " | Stock restante: " + libroDisponible.getStock());
+        }
 
         // Crear préstamo
         int nuevoId = PrestamoData.obtenerPrestamos().size() + 1;
@@ -52,6 +57,4 @@ public class PrestamoService {
             prestamo.mostrarResumen();
         }
     }
-
-
 }

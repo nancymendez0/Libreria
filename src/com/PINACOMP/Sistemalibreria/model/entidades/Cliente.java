@@ -45,6 +45,9 @@ public  class Cliente extends Persona{
         return telefono;
     }
 
+
+
+
     public TipoPago getPago() {
         return pago;
     }

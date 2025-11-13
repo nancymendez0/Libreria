@@ -18,8 +18,8 @@ public class PrestamoData {
         Cliente cli4 = new Cliente(4, "fernando.gomez@gmail.com", "Av. Juárez 10, Guadalajara");
 
         Libro libro1 = Biblioteca.obtenerLibros().get(0); // Ej: El Principito
-        Libro libro2 = Biblioteca.obtenerLibros().get(2); // Ej: 1984
-        Libro libro3 = Biblioteca.obtenerLibros().get(3); // Ej: Rayuela
+        Libro libro2 = Biblioteca.obtenerLibros().get(1); // Ej: 1984
+        Libro libro3 = Biblioteca.obtenerLibros().get(2); // Ej: Rayuela
         Libro libro4 = Biblioteca.obtenerLibros().get(1); // Ej: Crónica de una muerte anunciada
 
         listaPrestamos.add(new Prestamo(101, LocalDate.of(2025, 11, 10), cli1, libro1));

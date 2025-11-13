@@ -83,6 +83,13 @@ public class Venta implements OperacionBiblioteca {
     public double getPrecio() {
         return precio;
     }
+
+    public int getId(){
+        return this.cliente.getId();
+    }
+    public String getTitulo(){
+        return this.libro.getTitulo();
+    }
 }
 
 

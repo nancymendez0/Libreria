@@ -1,9 +1,6 @@
 package com.PINACOMP.Sistemalibreria.model.servicios;
 
-import com.PINACOMP.Sistemalibreria.model.entidades.Administrador;
-import com.PINACOMP.Sistemalibreria.model.entidades.Cliente;
-import com.PINACOMP.Sistemalibreria.model.entidades.Empleado;
-import com.PINACOMP.Sistemalibreria.model.entidades.Libro;
+import com.PINACOMP.Sistemalibreria.model.entidades.*;
 import com.PINACOMP.Sistemalibreria.model.enums.TipoGenero;
 import com.PINACOMP.Sistemalibreria.model.enums.TipoPuesto;
 import com.PINACOMP.Sistemalibreria.model.enums.TipoSexo;
@@ -159,12 +156,14 @@ public class MenuService {
 
             }
             case 7 -> {
+                String tituloPrestamo;
                 System.out.println("¿Qué título del libro deseas llevar a casa en prestamo?");
                 servicios.mostrarLibros(biblioteca); // muestra libros disponibles
                 System.out.println("Ingresa el título");
-                String tituloPrestamo = leerDatos();
-
+                tituloPrestamo = leerDatos();
+                System.out.println("Ya lei");
                 PrestamoService servicioPrestamo = new PrestamoService();
+                System.out.println("cree el servicio prestamo");
                 servicioPrestamo.prestarPorTitulo(tituloPrestamo, cliente, biblioteca);
             }
             case 0 -> System.out.println(" Saliendo del sistema...");
@@ -287,6 +286,10 @@ public class MenuService {
             case 2 -> serviciosEmpleados.agregarLibros(scanner);
             case 3 -> serviciosEmpleados.actualizarLibro(scanner);
             case 4 -> serviciosEmpleados.borrarLibro(scanner);
+            case 5 ->{
+                Reporte r = new Reporte();
+                r.generarReporteVentas();
+            }
             case 0 -> System.out.println(" Saliendo del sistema...");
             default -> System.out.println(" Opción no válida.");
         }

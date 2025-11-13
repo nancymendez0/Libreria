@@ -1,4 +1,6 @@
 package com.PINACOMP.Sistemalibreria.model.entidades;
+import com.PINACOMP.Sistemalibreria.data.VentasData;
+
 import java.util.List;
 
 //Clase que representa un reporte general de operaciones en la biblioteca.
@@ -11,10 +13,11 @@ public class Reporte {
     private double totalMultas;
     private List<String> librosMasPrestados;
 
+    public  Reporte(){
+
+    }
     // Constructor con parámetros
-    public Reporte(String titulo, String periodo, int totalPrestamos,
-                   int totalDevoluciones, double totalMultas,
-                   List<String> librosMasPrestados) {
+    public Reporte(String titulo, String periodo, int totalPrestamos, int totalDevoluciones, double totalMultas, List<String> librosMasPrestados) {
         this.titulo = titulo;
         this.periodo = periodo;
         this.totalPrestamos = totalPrestamos;
@@ -22,6 +25,7 @@ public class Reporte {
         this.totalMultas = totalMultas;
         this.librosMasPrestados = librosMasPrestados;
     }
+
 
     // Getters y Setters
     //Encapsulamiento , los atributos son privados impidiendo el acceso directo fuera de la clase
@@ -84,6 +88,26 @@ public class Reporte {
         for (String libro : librosMasPrestados) {
             System.out.println(" - " + libro);
         }
+    }
+    public void generarReporteVentas(){
+        System.out.println("REPORTE DE VENTAS");
+        List<Venta> ventas = VentasData.obtenerVentas();
+        if(ventas.isEmpty()){
+            System.out.println("No hay ventas registradas");
+            return;
+        }
+        double ganancias =0.0;
+        for(Venta v : ventas){
+            System.out.println("ID venta: "+v.getIdOperacion());
+            System.out.println("Fecha de venta: "+v.getFecha());
+            System.out.println("ID Cliente: "+v.getId());
+            System.out.println("Libro vendido: "+v.getTitulo());
+            System.out.println("Precio: "+v.getPrecio());
+            System.out.println();
+            ganancias=ganancias+v.getPrecio();
+        }
+        System.out.println("Total de ventas: "+ventas.size());
+        System.out.println("Ganancia total: "+ ganancias);
     }
     //Método para generar un reporte con stock
     public void generarReporteStock(List<Libro> libros) {
